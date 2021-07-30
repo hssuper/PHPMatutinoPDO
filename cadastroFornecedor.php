@@ -354,7 +354,7 @@ $(document).ready(function() {
         $("#bairro").val("");
         $("#cidade").val("");
         $("#uf").val("");
-        
+        $("#cepErro").val("");
     }
     
     //Quando o campo cep perde o foco.
