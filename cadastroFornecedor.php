@@ -393,14 +393,14 @@ $(document).ready(function() {
                     else {
                         //CEP pesquisado não foi encontrado.
                         limpa_formulário_cep();
-                        alert("CEP não encontrado.");
+                        $("#cepErro").val("** CEP não encontrado.");
                     }
                 });
             } //end if.
             else {
                 //cep é inválido.
                 limpa_formulário_cep();
-                alert("Formato de CEP inválido.");
+                $("#cepErro").val("** Formato de CEP inválido.");
             }
         } //end if.
         else {
