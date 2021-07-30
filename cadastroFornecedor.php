@@ -174,7 +174,7 @@ $btExcluir = FALSE;
                                     <input class="form-control" type="text" 
                                            name="nomeFornecedor" 
                                            value="<?php echo $fr->getNomeFornecedor(); ?>">
-                                    <label>CEP</label>  
+                                    <label>CEP</label> <label id="cepErro" style="color: reds;"></label> 
                                     <input class="form-control" type="text" id="cep"
                                            value="<?php echo $fr->getCep(); ?>" name="cep">
                                     <label>Rua/Logradouro</label>  
