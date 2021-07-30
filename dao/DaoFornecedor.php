@@ -1,7 +1,7 @@
 <?php
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/bd/Conecta.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/model/Fornecedor.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/model/Mensagem.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/bd/Conecta.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Fornecedor.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Mensagem.php';
 
 class DaoFornecedor {
 
@@ -125,7 +125,7 @@ class DaoFornecedor {
                     if($rs->rowCount() > 0){
                         while($linha = $rs->fetch(PDO::FETCH_OBJ)){
                             $fornecedor = new Fornecedor();
-                            $fornecedor->setIdfornecedor($linha->idfornecedor);
+                            $fornecedor->setIdFornecedor($linha->idFornecedor);
                             $fornecedor->setNomeFornecedor($linha->nomeFornecedor);
                             $fornecedor->setLogradouro($linha->logradouro);
                             $fornecedor->setNumero($linha->numero);
@@ -136,15 +136,15 @@ class DaoFornecedor {
                             $fornecedor->setCep($linha->cep);
                             $fornecedor->setRepresentante($linha->representante);
                             $fornecedor->setEmail($linha->email);
-                            $fornecedor->setTelFixo($linha->telfixo);
-                            $fornecedor->setTelCel($linha->telcel);
+                            $fornecedor->setTelFixo($linha->telFixo);
+                            $fornecedor->setTelCel($linha->telCel);
                             $lista[$a] = $fornecedor;
                             $a++;
                         }
                     }
                 }
             } catch (Exception $ex) {
-                $msg->setMsg($ex);
+                
             }  
             $conn = null;           
             return $lista;
@@ -204,7 +204,7 @@ class DaoFornecedor {
                     }
                 }
             } catch (Exception $ex) {
-                $msg->setMsg($ex);
+                
             }  
             $conn = null;
         }else{

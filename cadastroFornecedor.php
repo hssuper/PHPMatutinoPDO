@@ -278,10 +278,10 @@ $btExcluir = FALSE;
                             <tbody>
                                 <?php
                                 $fcTable = new FornecedorController();
-                                $listaFornecedores = $fcTable->listarFornecedores();
+                                $listarFornecedors = $fcTable->listarFornecedores();
                                 $a = 0;
-                                if ($listaFornecedores != null) {
-                                    foreach ($listaFornecedores as $lf) {
+                                if ($listarFornecedors != null) {
+                                    foreach ($listarFornecedors as $lf) {
                                         $a++;
                                         ?>
                                         <tr>

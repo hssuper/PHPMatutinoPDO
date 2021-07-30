@@ -1,6 +1,6 @@
 <?php
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/dao/DaoFornecedor.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/model/Fornecedor.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/dao/DaoFornecedor.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Fornecedor.php';
 
 class FornecedorController {
     
@@ -49,8 +49,8 @@ class FornecedorController {
     
     //método para carregar a lista de produtos que vem da DAO
     public function listarFornecedores(){
-        $daoFornecedor = new DaoFornecedor();
-        return $daoFornecedor->listarFornecedorsDAO();
+        $daoFornecedores = new DaoFornecedor();
+        return $daoFornecedores->listarFornecedorsDAO();
     }
     
     //método para excluir produto

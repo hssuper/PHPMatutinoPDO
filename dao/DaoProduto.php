@@ -1,7 +1,7 @@
 <?php
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/bd/Conecta.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/model/Produto.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/model/Mensagem.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/bd/Conecta.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Produto.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Mensagem.php';
 
 class DaoProduto {
 
@@ -99,7 +99,7 @@ class DaoProduto {
                     }
                 }
             } catch (Exception $ex) {
-                $msg->setMsg($ex);
+               
             }  
             $conn = null;           
             return $lista;
@@ -151,7 +151,7 @@ class DaoProduto {
                     }
                 }
             } catch (Exception $ex) {
-                $msg->setMsg($ex);
+               
             }  
             $conn = null;
         }else{
