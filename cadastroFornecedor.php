@@ -174,7 +174,7 @@ $btExcluir = FALSE;
                                     <input class="form-control" type="text" 
                                            name="nomeFornecedor" 
                                            value="<?php echo $fr->getNomeFornecedor(); ?>">
-                                    <label>CEP</label> <label id="cepErro" style="color: reds;"></label> 
+                                    <label>CEP</label>  
                                     <input class="form-control" type="text" id="cep"
                                            value="<?php echo $fr->getCep(); ?>" name="cep">
                                     <label>Rua/Logradouro</label>  
@@ -354,7 +354,7 @@ $(document).ready(function() {
         $("#bairro").val("");
         $("#cidade").val("");
         $("#uf").val("");
-        $("#cepErro").val("");
+        
     }
     
     //Quando o campo cep perde o foco.
@@ -393,14 +393,14 @@ $(document).ready(function() {
                     else {
                         //CEP pesquisado não foi encontrado.
                         limpa_formulário_cep();
-                        $("#cepErro").val("** CEP não encontrado.");
+                        alert("CEP não encontrado.");
                     }
                 });
             } //end if.
             else {
                 //cep é inválido.
                 limpa_formulário_cep();
-                $("#cepErro").val("** Formato de CEP inválido.");
+                alert("Formato de CEP inválido.");
             }
         } //end if.
         else {
