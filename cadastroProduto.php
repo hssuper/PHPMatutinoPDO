@@ -252,10 +252,10 @@ $btExcluir = FALSE;
                             <tbody>
                                 <?php
                                 $pcTable = new ProdutoController();
-                                $listaProdutos = $pcTable->listarProdutos();
+                                $listarProdutos = $pcTable->listarProdutos();
                                 $a = 0;
-                                if ($listaProdutos != null) {
-                                    foreach ($listaProdutos as $lp) {
+                                if ($listarProdutos != null) {
+                                    foreach ($listarProdutos as $lp) {
                                         $a++;
                                         ?>
                                         <tr>
