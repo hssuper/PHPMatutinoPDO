@@ -341,6 +341,8 @@ $btExcluir = FALSE;
 
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/jQuery.js"></script>
+    <script src="js/jQuery.min.js"></script>
     <script>
         var myModal = document.getElementById('myModal')
         var myInput = document.getElementById('myInput')
