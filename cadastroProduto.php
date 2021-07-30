@@ -2,8 +2,11 @@
 include_once 'controller/ProdutoController.php';
 include_once './model/Produto.php';
 include_once './model/Mensagem.php';
+$fcc = new FornecedorController();
 $msg = new Mensagem();
 $pr = new Produto();
+$fornecedor = new Fornecedor();
+$pr->setfkFornecedor($fornecedor);
 $btEnviar = FALSE;
 $btAtualizar = FALSE;
 $btExcluir = FALSE;
@@ -246,6 +249,7 @@ $btExcluir = FALSE;
                                     <th>Compra (R$)</th>
                                     <th>Venda (R$)</th>
                                     <th>Estoque</th>
+                                    <th>Fornecedor</th>
                                     <th>Ações</th></tr>
                             </thead>
                             <tbody>
@@ -263,6 +267,8 @@ $btExcluir = FALSE;
                                             <td><?php print_r($lp->getVlrCompra()); ?></td>
                                             <td><?php print_r($lp->getVlrVenda()); ?></td>
                                             <td><?php print_r($lp->getQtdEstoque()); ?></td>
+                                            <td><?php print_r($lp->getFornecedor()->getNomefornecedor()); ?></td>
+                                            <td><?php print_r($lp->getFornecedor()->getRepresentante()); ?></td>
                                             <td><a href="cadastroProduto.php?id=<?php echo $lp->getIdProduto(); ?>"
                                                    class="btn btn-light">
                                                     <img src="img/edita.png" width="32"></a>
