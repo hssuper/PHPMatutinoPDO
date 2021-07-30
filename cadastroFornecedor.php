@@ -23,6 +23,16 @@ $btExcluir = FALSE;
                 padding-bottom: 15px; padding-top: 15px;
             }
         </style>
+        <script>
+        function mascara(t, mask){
+ var i = t.value.length;
+ var saida = mask.substring(1,0);
+ var texto = mask.substring(i)
+ if (texto.substring(0,1) != saida){
+ t.value += texto.substring(0,1);
+ }
+ }
+ </script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -175,7 +185,7 @@ $btExcluir = FALSE;
                                            name="nomeFornecedor" 
                                            value="<?php echo $fr->getNomeFornecedor(); ?>">
                                     <label>CEP</label>  
-                                    <input class="form-control" type="text" id="cep"
+                                    <input class="form-control" type="text" id="cep" onkeypress="mascara(this, '#####-###')" maxlength="9"
                                            value="<?php echo $fr->getCep(); ?>" name="cep">
                                     <label>Rua/Logradouro</label>  
                                     <input class="form-control" type="text" id="rua"
@@ -199,10 +209,10 @@ $btExcluir = FALSE;
                                     <input class="form-control" type="text" 
                                            value="<?php echo $fr->getEmail(); ?>" name="email">
                                     <label>Tel. Fixo</label>  
-                                    <input class="form-control" type="text" 
+                                    <input class="form-control" type="text"  onkeypress="mascara(this, '## ####-####')" maxlength="12"
                                            value="<?php echo $fr->getTelFixo(); ?>" name="telFixo">
                                     <label>Celular (WhatsApp)</label>  
-                                    <input class="form-control" type="text" 
+                                    <input class="form-control" type="text"  onkeypress="mascara(this, '## #####-####')" maxlength="13"
                                            value="<?php echo $fr->getTelCel(); ?>" name="telCel">
                                     <input type="submit" name="cadastrarFornecedor"
                                            class="btn btn-success btInput" value="Enviar"
@@ -411,6 +421,50 @@ $(document).ready(function() {
 });
 
 </script>
+<script>
+
+</script>
+ <body>
+ <form name="cadatro">
+ <table width="500px" align="center">
+ <tr>
+ <td width="100px">
+ <b>CEP.:</b>
+ </td>
+ <td>
+ <input type="text" name="cep" onkeypress="mascara(this, '#####-###')" maxlength="9">
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <b>Tel Resid.:</b>
+ </td>
+ <td>
+ <input type="text" name="telefone" onkeypress="mascara(this, '## ####-####')" maxlength="12">
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <b>Tel Celular.:</b>
+ </td>
+ <td>
+ <input type="text" name="celular" onkeypress="mascara(this, '## #####-####')" maxlength="13">
+ </td>
+ </tr>
+ <tr>
+ <td colspan="2">
+ <input type="submit" value="Enviar">
+ <input type="reset" value="Limpar">
+ </td>
+ </tr>
+ </table>
+ </form>
+ </body>
+ </html>
+
+</script>
+
+
 </body>
 </html>
 
