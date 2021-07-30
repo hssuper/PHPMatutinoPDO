@@ -93,6 +93,23 @@ class DaoProduto {
                             $produto->setVlrCompra($linha->vlrCompra);
                             $produto->setVlrVenda($linha->vlrVenda);
                             $produto->setQtdEstoque($linha->qtdEstoque);
+
+                            $forn = new Fornecedor();
+                            $forn->setBairro($linha->bairro);
+                            $forn->setComplemento($linha->complemento);
+                            $forn->setLogradouro($linha->logradouro);
+                            $forn->setCep($linha->cep);
+                            $forn->setCidade($linha->cidade);
+                            $forn->setUf($linha->uf);
+                            $forn->setEmail($linha->email);
+                            $forn->setNomeFornecedor($linha->nomeFornecedor);
+                            $forn->setIdfornecedor($linha->idfornecedor);
+                            $forn->setRepresentante($linha->representante);
+                            $forn->setTelFixo($linha->telfixo);
+                            $forn->setTelCel($linha->telcel);
+                            
+                            $produto->setFkFornecedor($forn);
+
                             $lista[$a] = $produto;
                             $a++;
                         }
@@ -147,6 +164,24 @@ class DaoProduto {
                             $produto->setVlrCompra($linha->vlrCompra);
                             $produto->setVlrVenda($linha->vlrVenda);
                             $produto->setQtdEstoque($linha->qtdEstoque);
+
+                            $forn = new Fornecedor();
+                            $forn->setBairro($linha->bairro);
+                            $forn->setComplemento($linha->complemento);
+
+                            $forn->setLogradouro($linha->logradouro);
+                            $forn->setCep($linha->cep);
+                            $forn->setCidade($linha->cidade);
+                            $forn->setUf($linha->uf);
+                            $forn->setEmail($linha->email);
+                            $forn->setNomeFornecedor($linha->nomeFornecedor);
+                            $forn->setIdfornecedor($linha->idfornecedor);
+                            $forn->setRepresentante($linha->representante);
+                            $forn->setTelFixo($linha->telfixo);
+                            $forn->setTelCel($linha->telcel);
+                            
+                            $produto->setfkFornecedor($forn);
+
                         }
                     }
                 }
