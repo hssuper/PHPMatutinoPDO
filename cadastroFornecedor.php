@@ -70,7 +70,6 @@ $btExcluir = FALSE;
                             $nomeFornecedor = trim($_POST['nomeFornecedor']);
                             if ($nomeFornecedor != "") {
                                 $logradouro = $_POST['logradouro'];
-                                $numero = $_POST['numero'];
                                 $complemento = $_POST['complemento'];
                                 $bairro = $_POST['bairro'];
                                 $cidade = $_POST['cidade'];
@@ -83,9 +82,7 @@ $btExcluir = FALSE;
 
                                 $fc = new FornecedorController();
                                 unset($_POST['cadastrarFornecedor']);
-                                $msg = $fc->inserirFornecedor($nomeFornecedor, $logradouro,
-                                        $numero, $complemento, $bairro, $cidade, $uf, $cep,
-                                        $representante, $email, $telFixo, $telCel);
+                                $msg = $fc->inserirFornecedor($nomeFornecedor, $logradouro, $complemento, $bairro, $cidade, $uf, $cep, $representante, $email, $telFixo, $telCel);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroFornecedor.php'\">";
@@ -98,7 +95,6 @@ $btExcluir = FALSE;
                             if ($nomeFornecedor != "") {
                                 $idfornecedor = $_POST['idfornecedor'];
                                 $logradouro = $_POST['logradouro'];
-                                $numero = $_POST['numero'];
                                 $complemento = $_POST['complemento'];
                                 $bairro = $_POST['bairro'];
                                 $cidade = $_POST['cidade'];
@@ -112,7 +108,7 @@ $btExcluir = FALSE;
                                 $fc = new FornecedorController();
                                 unset($_POST['atualizarFornecedor']);
                                 $msg = $fc->atualizarFornecedor($idfornecedor, $nomeFornecedor, 
-                                        $logradouro, $numero, $complemento, $bairro, 
+                                        $logradouro, $complemento, $bairro, 
                                         $cidade, $uf, $cep, $representante, $email, 
                                         $telFixo, $telCel);
                                 echo $msg->getMsg();
@@ -184,9 +180,6 @@ $btExcluir = FALSE;
                                     <label>Rua/Logradouro</label>  
                                     <input class="form-control" type="text" 
                                            value="<?php echo $fr->getLogradouro(); ?>" name="logradouro">  
-                                    <label>Número</label>  
-                                    <input class="form-control" type="text" 
-                                           value="<?php echo $fr->getNumero(); ?>" name="numero"> 
                                     <label>Complemento</label>  
                                     <input class="form-control" type="text" 
                                            value="<?php echo $fr->getComplemento(); ?>" name="complemento">
