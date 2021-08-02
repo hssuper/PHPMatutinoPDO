@@ -192,7 +192,7 @@ class DaoProduto {
         }else{
             echo "<script>alert('Banco inoperante!')</script>";
             echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"0;
-			 URL='../PHPMatutino01/cadastroProduto.php'\">"; 
+			 URL='../PHPMatutinoPDO/cadastroProduto.php'\">"; 
         }
         return $produto;
     }
