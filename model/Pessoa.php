@@ -80,7 +80,7 @@ class Pessoa {
         $this->cpf = $cpf;
     }
 
-    function setfkEndereco(){
+    function setfkEndereco($fkEndereco){
      $this->fkEndereco = $fkEndereco;
     }
 
