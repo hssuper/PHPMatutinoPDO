@@ -21,7 +21,7 @@ class PessoController {
     
     //método para atualizar dados de pessoa no BD
     public function atualizarpessoa($id, $nome, $dtNasc, 
-            $login, $senha,$perfil){
+            $login, $senha,$perfil,$fkEndereco){
         $pessoa = new pessoa();
         $pessoa->setIdpessoa($id);
         $pessoa->setnome($nome);
@@ -29,7 +29,8 @@ class PessoController {
         $pessoa->setlogin($login);
         $pessoa->setsenha($senha);
         $pessoa->setperfil($perfil);
-        
+        $pessoa->setfkEndereco($fkEndereco);
+
         $daopessoa = new Daopessoa();
         return $daopessoa->atualizarpessoaDAO($pessoa);
     }
