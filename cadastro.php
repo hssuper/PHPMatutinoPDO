@@ -83,18 +83,18 @@ $btExcluir = FALSE;
 
                                 $pc = new PessoaController();
                                 unset($_POST['cadastrarPessoa']);
-                                $msg = $pc->inserirProduto($nome, $dtNasc,
+                                $msg = $pc->inserirPessoa($nome, $dtNasc,
                                         $login, $senha,$perfil,$email,$cpf , $fkPessoa);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
-                                    URL='cadastroProduto.php'\">";
+                                    URL='cadastroPessoa.php'\">";
                             }
                         }
                         
-                        //método para atualizar dados do produto no BD
+                        //método para atualizar dados do Pessoa no BD
                         if (isset($_POST['atualizarPessoa'])) {
-                            $nomeProduto = trim($_POST['nomePessoa']);
-                            if ($nomeProduto != "") {
+                            $nomePessoa = trim($_POST['nomePessoa']);
+                            if ($nomePessoa != "") {
                                 $fkPessoa = $_POST['idPessoa'];
                                 $dtNasc = $_POST['dtNasc'];
                                 $login = $_POST['login'];
@@ -105,12 +105,12 @@ $btExcluir = FALSE;
                                 $fkEndereco = $_POST['fkEndereco'];
                                 
 
-                                $pc = new ProdutoController();
+                                $pc = new PessoaController();
                                 unset($_POST['atualizarPessoa']);
-                                $msg = $pc->atualizarProduto($id, $nome, $vlrCompra, $vlrVenda, $qtdEstoque,$fkPessoa);
+                                $msg = $pc->atualizarPessoa($id, $nome, $vlrCompra, $vlrVenda, $qtdEstoque,$fkPessoa);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
-                                    URL='cadastroProduto.php'\">";
+                                    URL='cadastroPessoa.php'\">";
                             }
                         }
                         
@@ -118,39 +118,39 @@ $btExcluir = FALSE;
                             if ($pr != null) {
                                 $id = $_POST['ide'];
                                 
-                                $pc = new ProdutoController();
+                                $pc = new PessoaController();
                                 unset($_POST['excluir']);
-                                $msg = $pc->excluirProduto($id);
+                                $msg = $pc->excluirPessoa($id);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
-                                    URL='cadastroProduto.php'\">";
+                                    URL='cadastroPessoa.php'\">";
                             }
                         }
                         
-                        if (isset($_POST['excluirProduto'])) {
+                        if (isset($_POST['excluirPessoa'])) {
                             if ($pr != null) {
-                                $id = $_POST['idproduto'];
-                                unset($_POST['excluirProduto']);
-                                $pc = new ProdutoController();
-                                $msg = $pc->excluirProduto($id);
+                                $id = $_POST['idPessoa'];
+                                unset($_POST['excluirPessoa']);
+                                $pc = new PessoaController();
+                                $msg = $pc->excluirPessoa($id);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
-                                    URL='cadastroProduto.php'\">";
+                                    URL='cadastroPessoa.php'\">";
                             }
                         }
 
                         if (isset($_POST['limpar'])) {
                             $pr = null;
                             unset($_GET['id']);
-                            header("Location: cadastroProduto.php");
+                            header("Location: cadastroPessoa.php");
                         }
                         if (isset($_GET['id'])) {
                             $btEnviar = TRUE;
                             $btAtualizar = TRUE;
                             $btExcluir = TRUE;
                             $id = $_GET['id'];
-                            $pc = new ProdutoController();
-                            $pr = $pc->pesquisarProdutoId($id);
+                            $pc = new PessoaController();
+                            $pr = $pc->pesquisarPessoaId($id);
                         }
                         ?>
                         <form method="post" action="">
@@ -159,49 +159,47 @@ $btExcluir = FALSE;
                                     <strong>Código: <label style="color:red;">
                                             <?php
                                             if ($pr != null) {
-                                                echo $pr->getIdProduto();
+                                                echo $pr->getIdPessoa();
                                                 ?>
                                             </label></strong>
-                                        <input type="hidden" name="idproduto" 
-                                               value="<?php echo $pr->getIdProduto(); ?>"><br>
+                                        <input type="hidden" name="idPessoa" 
+                                               value="<?php echo $pr->getIdPessoa(); ?>"><br>
                                                <?php
                                            }
                                            ?>     
-                                    <label>Produto</label>  
+                                    <label>Nome</label>  
                                     <input class="form-control" type="text" 
-                                           name="nomeProduto" 
-                                           value="<?php echo $pr->getNomeProduto(); ?>">
-                                    <label>Valor de Compra</label>  
+                                           name="nome" 
+                                           value="<?php echo $pr->getNome(); ?>">
+                                    <label>Data Nasc</label>  
+                                    <input class="form-control" type="date" 
+                                           value="<?php echo $pr->getDtNasc(); ?>" name="dtNasc">  
+                                    <label>login</label>  
                                     <input class="form-control" type="text" 
-                                           value="<?php echo $pr->getVlrCompra(); ?>" name="vlrCompra">  
-                                    <label>Valor de Venda</label>  
+                                           value="<?php echo $pr->getLogin(); ?>" name="login"> 
+                                    <label>senha</label>  
                                     <input class="form-control" type="text" 
-                                           value="<?php echo $pr->getVlrVenda(); ?>" name="vlrVenda"> 
-                                    <label>Qtde em Estoque</label>  
-                                    <input class="form-control" type="number" 
-                                           value="<?php echo $pr->getQtdEstoque(); ?>" name="qtdEstoque">
-                                    
-                                    <label>Pessoa</label>  
-                                    <select class="form-control"  name="idPessoa">
-                                        <option>[--SELECIONE--]</option>
-                                        <?php
-                                          include_once 'controller/PessoaController.php';
-                                          $pc = new PessoaController();
-                                          $listaPessoa = $pc->listaPessoa();
-                                          if($listaPessoa != null){
-                                              foreach ($listaPessoa as $lp){
-                                                  ?>
-                                            <option value="<?php echo $lp->getIdPessoa();?>">
-                                                    <?php echo $lp->getNomePessoa();?></option>
-                                        <?php
-                                              }
+                                           value="<?php echo $pr->getSenha(); ?>" name="senha">
+                                           <label>perfil</label>  
+                                    <input class="form-control" type="text" 
+                                           value="<?php echo $pr->getPerfil(); ?>" name="perfil">
+                                           <label>email</label>  
+                                    <input class="form-control" type="text" 
+                                           value="<?php echo $pr->getEmail(); ?>" name="email">
+                                           <label>Cpf</label>  
+                                    <input class="form-control" type="text" 
+                                           value="<?php echo $pr->getCpf(); ?>" name="cpf">
+                                           <label>Endereco</label>  
+                                    <select class="form-control"  
+                                           value="<?php echo $pr->getfkEndereco(); ?>" name="fkEndereco">
+
                                           }
                                         ?>
                                     </select>
-                                    <input type="submit" name="cadastrarProduto"
+                                    <input type="submit" name="cadastrarPessoa"
                                            class="btn btn-success btInput" value="Enviar"
                                            <?php if($btEnviar == TRUE) echo "disabled"; ?>>
-                                    <input type="submit" name="atualizarProduto"
+                                    <input type="submit" name="atualizarPessoa"
                                            class="btn btn-secondary btInput" value="Atualizar"
                                            <?php if($btAtualizar == FALSE) echo "disabled"; ?>>
                                     <button type="button" class="btn btn-warning btInput" 
@@ -227,7 +225,7 @@ $btExcluir = FALSE;
                                                     <h5>Deseja Excluir?</h5>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <input type="submit" name="excluirProduto"
+                                                    <input type="submit" name="excluirPessoa"
                                                            class="btn btn-success "
                                                            value="Sim">
                                                     <input type="submit" 
@@ -254,31 +252,37 @@ $btExcluir = FALSE;
                                style="border-radius: 3px; overflow:hidden;">
                             <thead class="table-dark">
                                 <tr><th>Código</th>
-                                    <th>Produto</th>
-                                    <th>Compra (R$)</th>
-                                    <th>Venda (R$)</th>
-                                    <th>Estoque</th>
-                                    <th>Pessoa</th>
+                                    <th>Nome</th>
+                                    <th>dtNasc</th>
+                                    <th>login</th>
+                                    <th>senha</th>
+                                    <th>perfil</th>
+                                    <th>Email</th>
+                                    <th>Cpf</th>
+                                    <th>Endereco</th>
                                     <th>Ações</th></tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $pcTable = new ProdutoController();
-                                $listarProdutos = $pcTable->listarProdutos();
+                                $pcTable = new PessoaController();
+                                $listarPessoas = $pcTable->listarPessoas();
                                 $a = 0;
-                                if ($listarProdutos != null) {
-                                    foreach ($listarProdutos as $lp) {
+                                if ($listarPessoas != null) {
+                                    foreach ($listarPessoas as $lp) {
                                         $a++;
                                         ?>
                                         <tr>
-                                            <td><?php print_r($lp->getIdProduto()); ?></td>
-                                            <td><?php print_r($lp->getNomeProduto()); ?></td>
-                                            <td><?php print_r($lp->getVlrCompra()); ?></td>
-                                            <td><?php print_r($lp->getVlrVenda()); ?></td>
-                                            <td><?php print_r($lp->getQtdEstoque()); ?></td>
-                                            <td><?php print_r($lp->getPessoa()->getNomePessoa()); ?></td>
-                                            <td><?php print_r($lp->getPessoa()->getRepresentante()); ?></td>
-                                            <td><a href="cadastroProduto.php?id=<?php echo $lp->getIdProduto(); ?>"
+                                            <td><?php print_r($lp->getIdPessoa()); ?></td>
+                                            <td><?php print_r($lp->getNome()); ?></td>
+                                            <td><?php print_r($lp->getDtNasc()); ?></td>
+                                            <td><?php print_r($lp->getLogin()); ?></td>
+                                            <td><?php print_r($lp->getSenha()); ?></td>
+                                            <td><?php print_r($lp->getPerfil()); ?></td>
+                                            <td><?php print_r($lp->getEmail()); ?></td>
+                                            <td><?php print_r($lp->getCpf()); ?></td>
+                                            <td><?php print_r($lp->getfkEndereco()); ?></td>
+                                            
+                                            <td><a href="cadastroPessoa.php?id=<?php echo $lp->getIdPessoa(); ?>"
                                                    class="btn btn-light">
                                                     <img src="img/edita.png" width="32"></a>
                                                 </form>
@@ -298,10 +302,10 @@ $btExcluir = FALSE;
                                                 </div>
                                                 <div class="modal-body">
                                                     <form method="post" action="">
-                                                        <label><strong>Deseja excluir o produto 
-                                                                <?php echo $lp->getNomeProduto(); ?>?</strong></label>
+                                                        <label><strong>Deseja excluir o Pessoa 
+                                                                <?php echo $lp->getNomePessoa(); ?>?</strong></label>
                                                         <input type="hidden" name="ide" 
-                                                               value="<?php echo $lp->getIdProduto(); ?>">
+                                                               value="<?php echo $lp->getIdPessoa(); ?>">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" name="excluir" class="btn btn-primary">Sim</button>
