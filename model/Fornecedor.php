@@ -62,3 +62,4 @@ class Fornecedor {
     function setEndereco($endereco) {
         $this->endereco = $endereco;
     }
+}
