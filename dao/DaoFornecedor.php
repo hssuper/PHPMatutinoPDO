@@ -12,22 +12,26 @@ class DaoFornecedor {
         $conecta = $conn->conectadb();
         if($conecta){
             $nomeFornecedor = $fornecedor->getNomeFornecedor();
-            
-            
-
+            $logradouro = $fornecedor->getEndereco->getLogradouro();
+            $complemento = $fornecedor->getEndereco->getComplemento();
+            $bairro = $fornecedor->getEndereco->getBairro();
+            $cidade = $fornecedor->getEndereco->getCidade();
+            $uf = $fornecedor->getEndereco->getUf();
+            $cep = $fornecedor->getEndereco->getCep();
             $representante = $fornecedor->getRepresentante();
             $email = $fornecedor->getEmail();
             $telFixo = $fornecedor->getTelFixo();
             $telCel = $fornecedor->getTelCel();
-            $endereco = $fornecedor->getEndereco();
+
             try {
                 //processo para pegar o idendereco da tabela endereco, conforme 
                 //o cep e o logradouro informado.
                 $st = $conecta->prepare("select idendereco "
                         . "from endereco where cep = ? and "
-                        . "logradouro = ? limit 1");
+                        . "logradouro = ? and complemento = ? limit 1");
                 $st->bindParam(1, $cep);
                 $st->bindParam(2, $logradouro);
+                $st->bindParam(3, $complemento);
                 $linhaEndereco = $st->execute();
                 if($linhaEndereco){
                     
@@ -44,9 +48,10 @@ class DaoFornecedor {
                     
                     $st3 = $conecta->prepare("select idendereco "
                         . "from endereco where cep = ? and "
-                        . "logradouro = ? limit 1");
+                        . "logradouro = ? and complemento = ? limit 1");
                     $st3->bindParam(1, $cep);
                     $st3->bindParam(2, $logradouro);
+                    $st->bindParam(3, $complemento);
                     $linhaEndereco = $st3->execute();
                     if($linhaEndereco){
                         
