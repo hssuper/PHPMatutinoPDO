@@ -33,6 +33,17 @@ class FornecedorController {
     public function atualizarFornecedor($idfornecedor, $nomeFornecedor,
             $logradouro, $complemento, $bairro, $cidade, $uf, 
             $cep, $representante, $email, $telFixo, $telCel){
+
+                $endereco = new Endereco();
+                $endereco->setCep($cep);
+                $endereco->setLogradouro($logradouro);
+                $endereco->setComplemento($complemento);
+                $endereco->setBairro($bairro);
+                $endereco->setCidade($cidade);
+                $endereco->setUf($uf);
+
+
+
         $fornecedor = new Fornecedor();
         $fornecedor->setIdfornecedor($idfornecedor);
         $fornecedor->setNomeFornecedor($nomeFornecedor);
