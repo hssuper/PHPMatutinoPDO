@@ -12,12 +12,12 @@ class DaoFornecedor {
         $conecta = $conn->conectadb();
         if($conecta){
             $nomeFornecedor = $fornecedor->getNomeFornecedor();
-            $logradouro = $fornecedor->getEndereco->getLogradouro();
-            $complemento = $fornecedor->getEndereco->getComplemento();
-            $bairro = $fornecedor->getEndereco->getBairro();
-            $cidade = $fornecedor->getEndereco->getCidade();
-            $uf = $fornecedor->getEndereco->getUf();
-            $cep = $fornecedor->getEndereco->getCep();
+            $logradouro = $fornecedor->getEndereco()->getLogradouro();
+            $complemento = $fornecedor->getEndereco()->getComplemento();
+            $bairro = $fornecedor->getEndereco()->getBairro();
+            $cidade = $fornecedor->getEndereco()->getCidade();
+            $uf = $fornecedor->getEndereco()->getUf();
+            $cep = $fornecedor->getEndereco()->getCep();
             $representante = $fornecedor->getRepresentante();
             $email = $fornecedor->getEmail();
             $telFixo = $fornecedor->getTelFixo();
@@ -89,7 +89,12 @@ class DaoFornecedor {
         if($conecta){
             $idfornecedor = $fornecedor->getIdfornecedor();
             $nomeFornecedor = $fornecedor->getNomeFornecedor();
-            
+            $logradouro = $fornecedor->getEndereco()->getLogradouro();
+            $complemento = $fornecedor->getEndereco()->getComplemento();
+            $bairro = $fornecedor->getEndereco()->getBairro();
+            $cidade = $fornecedor->getEndereco()->getCidade();
+            $uf = $fornecedor->getEndereco()->getUf();
+            $cep = $fornecedor->getEndereco()->getCep();
             $representante = $fornecedor->getRepresentante();
             $email = $fornecedor->getEmail();
             $telFixo = $fornecedor->getTelFixo();

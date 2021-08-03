@@ -15,6 +15,7 @@ class FornecedorController {
         $endereco->setBairro($bairro);
         $endereco->setCidade($cidade);
         $endereco->setUf($uf);
+        
         $fornecedor = new Fornecedor();
         $fornecedor->setNomeFornecedor($nomeFornecedor);
         $fornecedor->setRepresentante($representante);
