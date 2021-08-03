@@ -1,6 +1,6 @@
 <?php
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO2/dao/DaoFornecedor.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO2/model/Fornecedor.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/dao/DaoFornecedor.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Fornecedor.php';
 
 class FornecedorController {
     
