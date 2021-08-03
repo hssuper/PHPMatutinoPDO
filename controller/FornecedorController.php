@@ -1,27 +1,28 @@
 <?php
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/dao/DaoFornecedor.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Fornecedor.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO2/dao/DaoFornecedor.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO2/model/Fornecedor.php';
 
 class FornecedorController {
     
     public function inserirFornecedor($nomeFornecedor, $logradouro, 
-             $complemento, $bairro, $cidade, $uf, $cep,
+            $complemento, $bairro, $cidade, $uf, $cep,
             $representante, $email, $telFixo, $telCel){
+        
         $endereco = new Endereco();
         $endereco->setCep($cep);
-        $endereco->setUf($uf);
-        $endereco->setCidade($cidade);
-        $endereco->setBairro($bairro);
-        $endereco->setComplemento($complemento);
         $endereco->setLogradouro($logradouro);
-
+        $endereco->setComplemento($complemento);
+        $endereco->setBairro($bairro);
+        $endereco->setCidade($cidade);
+        $endereco->setUf($uf);
+        
         $fornecedor = new Fornecedor();
         $fornecedor->setNomeFornecedor($nomeFornecedor);
         $fornecedor->setRepresentante($representante);
         $fornecedor->setEmail($email);
         $fornecedor->setTelFixo($telFixo);
         $fornecedor->setTelCel($telCel);
-
+                
         $fornecedor->setEndereco($endereco);
         
         $daoFornecedor = new DaoFornecedor();
@@ -30,7 +31,7 @@ class FornecedorController {
     
     //método para atualizar dados de produto no BD
     public function atualizarFornecedor($idfornecedor, $nomeFornecedor,
-            $logradouro,  $complemento, $bairro, $cidade, $uf, 
+            $logradouro, $complemento, $bairro, $cidade, $uf, 
             $cep, $representante, $email, $telFixo, $telCel){
         $fornecedor = new Fornecedor();
         $fornecedor->setIdfornecedor($idfornecedor);
@@ -51,8 +52,8 @@ class FornecedorController {
     
     //método para carregar a lista de produtos que vem da DAO
     public function listarFornecedores(){
-        $daoFornecedores = new DaoFornecedor();
-        return $daoFornecedores->listarFornecedorsDAO();
+        $daoFornecedor = new DaoFornecedor();
+        return $daoFornecedor->listarFornecedorsDAO();
     }
     
     //método para excluir produto
