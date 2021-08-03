@@ -36,7 +36,7 @@ class DaoFornecedor {
                     
                 }else{
                     $st2 = $conecta->prepare("insert into "
-                            . "endereco values (null,?,?,?,?,?,?");
+                            . "endereco values (null,?,?,?,?,?,?)");
                     $st2->bindParam(1, $logradouro);
                     $st2->bindParam(2, $complemento);
                     $st2->bindParam(3, $bairro);
