@@ -13,7 +13,7 @@ class PessoController {
         $pessoa->setperfil($perfil);
         $pessoa->setEmail($email);
         $pessoa->setcpf($cpf);
-        $pessoa->setfkEndereco($fkEndereco);
+        
         
         $daopessoa = new Daopessoa();
         return $daopessoa->inserir($pessoa);
@@ -29,7 +29,7 @@ class PessoController {
         $pessoa->setlogin($login);
         $pessoa->setsenha($senha);
         $pessoa->setperfil($perfil);
-        $pessoa->setfkEndereco($fkEndereco);
+        
 
         $daopessoa = new Daopessoa();
         return $daopessoa->atualizarpessoaDAO($pessoa);

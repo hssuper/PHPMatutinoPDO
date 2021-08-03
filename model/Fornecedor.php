@@ -13,7 +13,12 @@ class Fornecedor {
     private $email;
     private $telFixo;
     private $telCel;
+    private $endereco;
     
+    function getEndereco() {
+        return $this->endereco;
+    }
+
     function getIdfornecedor() {
         return $this->idfornecedor;
     }
@@ -64,6 +69,10 @@ class Fornecedor {
 
     function setIdfornecedor($idfornecedor) {
         $this->idfornecedor = $idfornecedor;
+    }
+
+    function setEndereco($endereco) {
+        $this->endereco = $endereco;
     }
 
     function setNomeFornecedor($nomeFornecedor) {

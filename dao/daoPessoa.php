@@ -19,11 +19,11 @@ class daoPessoa {
             $perfil = $pessoa->getPerfil();
             $email = $pessoa->getEmail();
             $cpf = $pessoa->getCpf();
-            $fkEndereco = $pessoa->getfkEndereco();
+            
 
             try {
                 $stmt = $conecta->prepare("insert into pessoa values "
-                        . "(null,?,?,?,?,?,?,?,)");
+                        . "(null,?,?,?,?,?,?,?)");
                 $stmt->bindParam(1, $nome);
                 $stmt->bindParam(2, $dtNasc);
                 $stmt->bindParam(3, $login);
@@ -31,7 +31,7 @@ class daoPessoa {
                 $stmt->bindParam(5, $perfil);
                 $stmt->bindParam(6, $email);
                 $stmt->bindParam(7, $cpf);
-                $stmt->bindParam(8, $fkEndereco);
+                
                 
                 $stmt->execute();
                 $msg->setMsg("<p style='color: green;'>"
@@ -60,7 +60,7 @@ class daoPessoa {
             $perfil = $pessoa->getPerfil();
             $email = $pessoa->getEmail();
             $cpf = $pessoa->getCpf();
-            $fkEndereco = $pessoa->getfkEndereco();
+            
            
             try{
                 $stmt = $conecta->prepare("update pessoa set "
@@ -80,8 +80,7 @@ class daoPessoa {
                 $stmt->bindParam(5, $perfil);
                 $stmt->bindParam(6, $email);
                 $stmt->bindParam(8, $cpf);
-                $stmt->bindParam(9, $fkEndereco);
-                $stmt->bindParam(10, $idpessoa);
+                $stmt->bindParam(9, $idpessoa);
                 $stmt->execute();
                 $msg->setMsg("<p style='color: blue;'>"
                         . "Dados atualizados com sucesso</p>");
@@ -117,7 +116,7 @@ class daoPessoa {
                             $pessoa->setPerfil($linha->perfil);
                             $pessoa->setEmail($linha->email);
                             $pessoa->setCpf($linha->cpf);
-                            $pessoa->setfkEndereco($linha->fkEndereco);
+                            
 
                             $lista[$a] = $pessoa;
                             $a++;
@@ -176,7 +175,7 @@ class daoPessoa {
                             $pessoa->setPerfil($linha->perfil);
                             $pessoa->setEmail($linha->email);
                             $pessoa->setCpf($linha->cpf);
-                            $pessoa->setfkEndereco($linha->fkEndereco);
+                            
                         }
                     }
                 }

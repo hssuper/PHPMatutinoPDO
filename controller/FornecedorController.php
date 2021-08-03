@@ -7,18 +7,22 @@ class FornecedorController {
     public function inserirFornecedor($nomeFornecedor, $logradouro, 
              $complemento, $bairro, $cidade, $uf, $cep,
             $representante, $email, $telFixo, $telCel){
+        $endereco = new Endereco();
+        $endereco->setCep($cep);
+        $endereco->setUf($uf);
+        $endereco->setCidade($cidade);
+        $endereco->setBairro($bairro);
+        $endereco->setComplemento($complemento);
+        $endereco->setLogradouro($logradouro);
+
         $fornecedor = new Fornecedor();
         $fornecedor->setNomeFornecedor($nomeFornecedor);
-        $fornecedor->setLogradouro($logradouro);
-        $fornecedor->setComplemento($complemento);
-        $fornecedor->setBairro($bairro);
-        $fornecedor->setCidade($cidade);
-        $fornecedor->setUf($uf);
-        $fornecedor->setCep($cep);
         $fornecedor->setRepresentante($representante);
         $fornecedor->setEmail($email);
         $fornecedor->setTelFixo($telFixo);
         $fornecedor->setTelCel($telCel);
+
+        $fornecedor->setEndereco($endereco);
         
         $daoFornecedor = new DaoFornecedor();
         return $daoFornecedor->inserir($fornecedor);

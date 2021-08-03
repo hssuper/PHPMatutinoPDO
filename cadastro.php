@@ -2,6 +2,7 @@
 include_once 'controller/PessoaController.php';
 include_once './model/Pessoa.php';
 include_once './model/Mensagem.php';
+
 $pc = new PessoaController();
 $msg = new Mensagem();
 $pr = new Pessoa();
@@ -78,13 +79,12 @@ $btExcluir = FALSE;
                                 $perfil = $_POST['perfil'];
                                 $email = $_POST['email'];
                                 $cpf = $_POST['cpf'];
-                                $fkEndereco = $_POST['fkEndereco'];
                                 $idPessoa = $_POST['idPessoa'];
 
                                 $pc = new PessoaController();
                                 unset($_POST['cadastrarPessoa']);
                                 $msg = $pc->inserirPessoa($nome, $dtNasc,
-                                        $login, $senha,$perfil,$email,$cpf , $fkPessoa);
+                                        $login, $senha,$perfil,$email,$cpf );
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroPessoa.php'\">";
@@ -102,12 +102,12 @@ $btExcluir = FALSE;
                                 $perfil = $_POST['perfil'];
                                 $email = $_POST['email'];
                                 $cpf = $_POST['cpf'];
-                                $fkEndereco = $_POST['fkEndereco'];
+                                
                                 
 
                                 $pc = new PessoaController();
                                 unset($_POST['atualizarPessoa']);
-                                $msg = $pc->atualizarPessoa($id, $nome, $vlrCompra, $vlrVenda, $qtdEstoque,$fkPessoa);
+                                $msg = $pc->atualizarPessoa($id, $nome, $vlrCompra, $vlrVenda, $qtdEstoque);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroPessoa.php'\">";
@@ -190,8 +190,7 @@ $btExcluir = FALSE;
                                     <input class="form-control" type="text" 
                                            value="<?php echo $pr->getCpf(); ?>" name="cpf">
                                            <label>Endereco</label>  
-                                    <select class="form-control"  
-                                           value="<?php echo $pr->getfkEndereco(); ?>" name="fkEndereco">
+                                    
 
                                           }
                                         ?>
@@ -280,7 +279,7 @@ $btExcluir = FALSE;
                                             <td><?php print_r($lp->getPerfil()); ?></td>
                                             <td><?php print_r($lp->getEmail()); ?></td>
                                             <td><?php print_r($lp->getCpf()); ?></td>
-                                            <td><?php print_r($lp->getfkEndereco()); ?></td>
+                                            
                                             
                                             <td><a href="cadastroPessoa.php?id=<?php echo $lp->getIdPessoa(); ?>"
                                                    class="btn btn-light">
