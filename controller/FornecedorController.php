@@ -15,7 +15,7 @@ class FornecedorController {
         $endereco->setBairro($bairro);
         $endereco->setCidade($cidade);
         $endereco->setUf($uf);
-        
+
         $fornecedor = new Fornecedor();
         $fornecedor->setNomeFornecedor($nomeFornecedor);
         $fornecedor->setRepresentante($representante);
@@ -57,9 +57,9 @@ class FornecedorController {
     }
     
     //método para carregar a lista de produtos que vem da DAO
-    public function listarFornecedors(){
+    public function listarFornecedores(){
         $daoFornecedor = new DaoFornecedor();
-        return $daoFornecedor->listarFornecedorsDAO();
+        return $daoFornecedor->listarFornecedoresDAO();
     }
     
     //método para excluir produto
