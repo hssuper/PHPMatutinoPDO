@@ -36,12 +36,7 @@ class FornecedorController {
         $fornecedor = new Fornecedor();
         $fornecedor->setIdfornecedor($idfornecedor);
         $fornecedor->setNomeFornecedor($nomeFornecedor);
-        $fornecedor->setLogradouro($logradouro);
-        $fornecedor->setComplemento($complemento);
-        $fornecedor->setBairro($bairro);
-        $fornecedor->setCidade($cidade);
-        $fornecedor->setUf($uf);
-        $fornecedor->setCep($cep);
+        
         $fornecedor->setRepresentante($representante);
         $fornecedor->setEmail($email);
         $fornecedor->setTelFixo($telFixo);
