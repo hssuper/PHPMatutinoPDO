@@ -1,8 +1,8 @@
 <?php
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO2/bd/Conecta.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO2/model/Fornecedor.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO2/model/Endereco.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO2/model/Mensagem.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/bd/Conecta.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Fornecedor.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Endereco.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Mensagem.php';
 
 class DaoFornecedor {
 
