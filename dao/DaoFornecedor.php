@@ -33,7 +33,7 @@ class DaoFornecedor {
                 $st->bindParam(2, $logradouro);
                 $linhaEndereco = $st->execute();
                 if($linhaEndereco){
-                    $fkEnd = $linhaEndereco->idendereco;
+                    
                 }else{
                     $st2 = $conecta->prepare("insert into "
                             . "endereco values (null,?,?,?,?,?,?");
@@ -52,7 +52,7 @@ class DaoFornecedor {
                     $st3->bindParam(2, $logradouro);
                     $linhaEndereco = $st3->execute();
                     if($linhaEndereco){
-                        $fkEnd = $linhaEndereco->idendereco;
+                        
                     }
                 }
                 
@@ -87,12 +87,7 @@ class DaoFornecedor {
         if($conecta){
             $idfornecedor = $fornecedor->getIdfornecedor();
             $nomeFornecedor = $fornecedor->getNomeFornecedor();
-            $logradouro = $fornecedor->getLogradouro();
-            $complemento = $fornecedor->getComplemento();
-            $bairro = $fornecedor->getBairro();
-            $cidade = $fornecedor->getCidade();
-            $uf = $fornecedor->getUf();
-            $cep = $fornecedor->getCep();
+            
             $representante = $fornecedor->getRepresentante();
             $email = $fornecedor->getEmail();
             $telFixo = $fornecedor->getTelFixo();
@@ -172,7 +167,7 @@ class DaoFornecedor {
                     }
                 }
             } catch (Exception $ex) {
-                $msg->setMsg($ex);
+                
             }  
             $conn = null;           
             return $lista;
@@ -236,7 +231,7 @@ class DaoFornecedor {
                     }
                 }
             } catch (Exception $ex) {
-                $msg->setMsg($ex);
+                
             }  
             $conn = null;
         }else{
