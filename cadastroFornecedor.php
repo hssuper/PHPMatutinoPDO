@@ -1,3 +1,5 @@
+<?php
+
 include_once 'controller/FornecedorController.php';
 include_once './model/Fornecedor.php';
 include_once './model/Endereco.php';
