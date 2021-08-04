@@ -7,14 +7,14 @@ class Produto {
     private $vlrCompra;
     private $vlrVenda;
     private $qtdEstoque;
-    private $fkFornecedor;
+    private $fornecedor;
     
-    function getFkFornecedor() {
-        return $this->fkFornecedor;
+    function getFornecedor() {
+        return $this->fornecedor;
     }
 
-    function setFkFornecedor($fkFornecedor) {
-        $this->fkFornecedor = $fkFornecedor;
+    function setFornecedor($fornecedor) {
+        $this->fornecedor = $fornecedor;
     }
         
     function getIdProduto() {
