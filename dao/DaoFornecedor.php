@@ -99,7 +99,7 @@ class DaoFornecedor {
         $msg = new Mensagem();
         $conecta = $conn->conectadb();
         if($conecta){
-            $idfornecedor = $fornecedor->getIdfornecedor();
+            $idFornecedor = $fornecedor->getIdFornecedor();
             $nomeFornecedor = $fornecedor->getNomeFornecedor();
             $logradouro = $fornecedor->getEndereco()->getLogradouro();
             $complemento = $fornecedor->getEndereco()->getComplemento();
@@ -174,7 +174,7 @@ class DaoFornecedor {
                             $endereco->setCep($linha->cep);
                             
                             $fornecedor = new Fornecedor();
-                            $fornecedor->setIdfornecedor($linha->idfornecedor);
+                            $fornecedor->setIdFornecedor($linha->idfornecedor);
                             $fornecedor->setNomeFornecedor($linha->nomeFornecedor);
                             $fornecedor->setRepresentante($linha->representante);
                             $fornecedor->setEmail($linha->email);
