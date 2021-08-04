@@ -112,34 +112,65 @@ class DaoFornecedor {
             $telFixo = $fornecedor->getTelFixo();
             $telCel = $fornecedor->getTelCel();
             try{
+                //processo para pegar o idendereco da tabela endereco, conforme 
+                //o cep, o logradouro e o complemento informado.
+                $st = $conecta->prepare("select idendereco "
+                        . "from endereco where cep = ? and "
+                        . "logradouro = ? and complemento = ? limit 1");
+                $st->bindParam(1, $cep);
+                $st->bindParam(2, $logradouro);
+                $st->bindParam(3, $complemento);
+                $fkEnd = "";
+                if($st->execute()){
+                    if($st->rowCount() > 0){
+                        //$msg->setMsg("".$st->rowCount());
+                        while($linha = $st->fetch(PDO::FETCH_OBJ)){
+                            $fkEnd = $linha->idendereco;
+                        }
+                        //$msg->setMsg("$fkEnd");
+                    }else{
+                        $st2 = $conecta->prepare("insert into "
+                                . "endereco values (null,?,?,?,?,?,?)");
+                        $st2->bindParam(1, $logradouro);
+                        $st2->bindParam(2, $complemento);
+                        $st2->bindParam(3, $bairro);
+                        $st2->bindParam(4, $cidade);
+                        $st2->bindParam(5, $uf);
+                        $st2->bindParam(6, $cep);
+                        $st2->execute();
+                        
+                        $st3 = $conecta->prepare("select idendereco "
+                            . "from endereco where cep = ? and "
+                            . "logradouro = ? and complemento = ? limit 1");
+                        $st3->bindParam(1, $cep);
+                        $st3->bindParam(2, $logradouro);
+                        $st3->bindParam(3, $complemento);
+                        if($st3->execute()){
+                            if($st3->rowCount() > 0){
+                                $linha = $st3->fetch(PDO::FETCH_OBJ);
+                                $fkEnd = $linha->idendereco;
+                            }
+                        }
+                    }
+                }
                 $stmt = $conecta->prepare("update fornecedor set "
                         . "nomeFornecedor = ?,"
-                        . "logradouro = ?,"
-                        . "complemento = ?, "
-                        . "bairro = ?, "
-                        . "cidade = ?, "
-                        . "uf = ?, "
-                        . "cep = ?, "
                         . "representante = ?, "
                         . "email = ?, "
                         . "telfixo = ?, "
-                        . "telcel = ? "
+                        . "telcel = ?, "
+                        . "fkendereco = ? "
                         . "where idfornecedor = ?");
                 $stmt->bindParam(1, $nomeFornecedor);
-                $stmt->bindParam(2, $logradouro);
-                $stmt->bindParam(3, $complemento);
-                $stmt->bindParam(4, $bairro);
-                $stmt->bindParam(5, $cidade);
-                $stmt->bindParam(6, $uf);
-                $stmt->bindParam(7, $cep);
-                $stmt->bindParam(8, $representante);
-                $stmt->bindParam(9, $email);
-                $stmt->bindParam(10, $telFixo);
-                $stmt->bindParam(11, $telCel);
-                $stmt->bindParam(12, $idfornecedor);
+                $stmt->bindParam(2, $representante);
+                $stmt->bindParam(3, $email);
+                $stmt->bindParam(4, $telFixo);
+                $stmt->bindParam(5, $telCel);
+                $stmt->bindParam(6, $fkEnd);
+                $stmt->bindParam(7, $idfornecedor);
                 $stmt->execute();
                 $msg->setMsg("<p style='color: blue;'>"
-                        . "Dados atualizados com sucesso</p>");
+                            . "Dados atualizados com sucesso</p>");
             } catch (Exception $ex) {
                 $msg->setMsg($ex);
             }
@@ -205,7 +236,7 @@ class DaoFornecedor {
                         . "where fkfornecedor = ?");
                 $stmt->bindParam(1, $id);
                 $stmt->execute();
-                $stmt = $conecta->prepare("delete from fornecedor "
+                $stmt = $conecta->prepare("delete from produto "
                         . "where idfornecedor = ?");
                 $stmt->bindParam(1, $id);
                 $stmt->execute();

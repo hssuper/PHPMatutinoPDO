@@ -3,7 +3,7 @@ include_once 'controller/PessoaController.php';
 include_once './model/Pessoa.php';
 include_once './model/Mensagem.php';
 
-$pc = new PessoaController();
+$pc = new PessoController();
 $msg = new Mensagem();
 $pr = new Pessoa();
 $Pessoa = new Pessoa();
@@ -81,7 +81,7 @@ $btExcluir = FALSE;
                                 $cpf = $_POST['cpf'];
                                 $idPessoa = $_POST['idPessoa'];
 
-                                $pc = new PessoaController();
+                                $pc = new PessoController();
                                 unset($_POST['cadastrarPessoa']);
                                 $msg = $pc->inserirPessoa($nome, $dtNasc,
                                         $login, $senha,$perfil,$email,$cpf );
@@ -105,9 +105,9 @@ $btExcluir = FALSE;
                                 
                                 
 
-                                $pc = new PessoaController();
+                                $pc = new PessoController();
                                 unset($_POST['atualizarPessoa']);
-                                $msg = $pc->atualizarPessoa($id, $nome, $vlrCompra, $vlrVenda, $qtdEstoque);
+                                $msg = $pc->atualizarPessoa($id, $nome, $vlrCompra, $vlrVenda, $qtdEstoque,$fkEndereco);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroPessoa.php'\">";
@@ -118,7 +118,7 @@ $btExcluir = FALSE;
                             if ($pr != null) {
                                 $id = $_POST['ide'];
                                 
-                                $pc = new PessoaController();
+                                $pc = new PessoController();
                                 unset($_POST['excluir']);
                                 $msg = $pc->excluirPessoa($id);
                                 echo $msg->getMsg();
@@ -131,7 +131,7 @@ $btExcluir = FALSE;
                             if ($pr != null) {
                                 $id = $_POST['idPessoa'];
                                 unset($_POST['excluirPessoa']);
-                                $pc = new PessoaController();
+                                $pc = new PessoController();
                                 $msg = $pc->excluirPessoa($id);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
@@ -149,7 +149,7 @@ $btExcluir = FALSE;
                             $btAtualizar = TRUE;
                             $btExcluir = TRUE;
                             $id = $_GET['id'];
-                            $pc = new PessoaController();
+                            $pc = new PessoController();
                             $pr = $pc->pesquisarPessoaId($id);
                         }
                         ?>
@@ -263,7 +263,7 @@ $btExcluir = FALSE;
                             </thead>
                             <tbody>
                                 <?php
-                                $pcTable = new PessoaController();
+                                $pcTable = new PessoController();
                                 $listarPessoas = $pcTable->listarPessoas();
                                 $a = 0;
                                 if ($listarPessoas != null) {

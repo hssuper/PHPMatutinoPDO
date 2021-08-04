@@ -2,6 +2,8 @@
 
 require_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/bd/Conecta.php';
 require_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Pessoa.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Endereco.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Mensagem.php';
 
 class daoPessoa {
 
@@ -12,6 +14,9 @@ class daoPessoa {
         $msg = new Mensagem();
         $conecta = $conn->conectadb();
         if($conecta){
+            
+
+
             $nome = $pessoa->getNome();
             $dtNasc = $pessoa->getDtNasc();
             $login = $pessoa->getLogin();
