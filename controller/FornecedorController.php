@@ -49,7 +49,7 @@ class FornecedorController {
         $fornecedor->setTelCel($telCel);
 
         $fornecedor->setEndereco($endereco);
-        
+
         $daoFornecedor = new DaoFornecedor();
         return $daoFornecedor->atualizarFornecedorDAO($fornecedor);
     }
@@ -57,7 +57,7 @@ class FornecedorController {
     //método para carregar a lista de produtos que vem da DAO
     public function listarFornecedores(){
         $daoFornecedor = new DaoFornecedor();
-        return $daoFornecedor->listarFornecedorsDAO();
+        return $daoFornecedor->listarFornecedoresDAO();
     }
     
     //método para excluir produto

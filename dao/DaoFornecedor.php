@@ -152,7 +152,7 @@ class DaoFornecedor {
     }
     
     //método para carregar lista de produtos do banco de dados
-    public function listarFornecedorsDAO(){
+    public function listarFornecedoresDAO(){
         $conn = new Conecta();
         $conecta = $conn->conectadb();
         if($conecta){
