@@ -99,7 +99,7 @@ class DaoFornecedor {
         $msg = new Mensagem();
         $conecta = $conn->conectadb();
         if($conecta){
-            $idFornecedor = $fornecedor->getIdFornecedor();
+            $idfornecedor = $fornecedor->getIdfornecedor();
             $nomeFornecedor = $fornecedor->getNomeFornecedor();
             $logradouro = $fornecedor->getEndereco()->getLogradouro();
             $complemento = $fornecedor->getEndereco()->getComplemento();
@@ -174,7 +174,7 @@ class DaoFornecedor {
                             $endereco->setCep($linha->cep);
                             
                             $fornecedor = new Fornecedor();
-                            $fornecedor->setIdFornecedor($linha->idfornecedor);
+                            $fornecedor->setIdfornecedor($linha->idfornecedor);
                             $fornecedor->setNomeFornecedor($linha->nomeFornecedor);
                             $fornecedor->setRepresentante($linha->representante);
                             $fornecedor->setEmail($linha->email);
@@ -201,6 +201,10 @@ class DaoFornecedor {
         $msg = new Mensagem();
         if($conecta){
              try {
+                $stmt = $conecta->prepare("delete from produto "
+                        . "where fkfornecedor = ?");
+                $stmt->bindParam(1, $id);
+                $stmt->execute();
                 $stmt = $conecta->prepare("delete from fornecedor "
                         . "where idfornecedor = ?");
                 $stmt->bindParam(1, $id);
