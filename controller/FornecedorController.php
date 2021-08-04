@@ -47,6 +47,9 @@ class FornecedorController {
         $fornecedor->setEmail($email);
         $fornecedor->setTelFixo($telFixo);
         $fornecedor->setTelCel($telCel);
+
+        $fornecedor->setEndereco($endereco);
+        
         $daoFornecedor = new DaoFornecedor();
         return $daoFornecedor->atualizarFornecedorDAO($fornecedor);
     }
