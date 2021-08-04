@@ -155,6 +155,7 @@ class DaoFornecedor {
     public function listarFornecedoresDAO(){
         $conn = new Conecta();
         $conecta = $conn->conectadb();
+        $msg = new Mensagem();
         if($conecta){
             try {
                 $rs = $conecta->query("select * from fornecedor inner join endereco "
@@ -221,6 +222,7 @@ class DaoFornecedor {
         $conn = new Conecta();
         $conecta = $conn->conectadb();
         $fornecedor = new Fornecedor();
+        $msg = new Mensagem();
         if($conecta){
             try {
                 $rs = $conecta->prepare("select * from fornecedor inner join endereco "
