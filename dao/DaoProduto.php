@@ -82,6 +82,7 @@ class DaoProduto {
     public function listarProdutosDAO(){
         $conn = new Conecta();
         $conecta = $conn->conectadb();
+        $msg = new Mensagem();
         if($conecta){
             try {
                 $rs = $conecta->query("SELECT * FROM produto inner join fornecedor "
@@ -100,12 +101,7 @@ class DaoProduto {
                             $produto->setQtdEstoque($linha->qtdEstoque);
                             
                             $forn = new Fornecedor();
-                            $forn->setBairro($linha->bairro);
-                            $forn->setComplemento($linha->complemento);
-                            $forn->setLogradouro($linha->logradouro);
-                            $forn->setCep($linha->cep);
-                            $forn->setCidade($linha->cidade);
-                            $forn->setUf($linha->uf);
+                        
                             $forn->setEmail($linha->email);
                             $forn->setNomeFornecedor($linha->nomeFornecedor);
                             $forn->setIdfornecedor($linha->idfornecedor);
@@ -155,6 +151,7 @@ class DaoProduto {
     public function pesquisarProdutoIdDAO($id){
         $conn = new Conecta();
         $conecta = $conn->conectadb();
+        $msg = new Mensagem();
         $produto = new Produto();
         if($conecta){
             try {
@@ -172,12 +169,7 @@ class DaoProduto {
                             $produto->setQtdEstoque($linha->qtdEstoque);
                             
                             $forn = new Fornecedor();
-                            $forn->setBairro($linha->bairro);
-                            $forn->setComplemento($linha->complemento);
-                            $forn->setLogradouro($linha->logradouro);
-                            $forn->setCep($linha->cep);
-                            $forn->setCidade($linha->cidade);
-                            $forn->setUf($linha->uf);
+                           
                             $forn->setEmail($linha->email);
                             $forn->setNomeFornecedor($linha->nomeFornecedor);
                             $forn->setIdfornecedor($linha->idfornecedor);
