@@ -205,12 +205,12 @@ class DaoFornecedor {
                             $endereco->setCep($linha->cep);
                             
                             $fornecedor = new Fornecedor();
-                            $fornecedor->setIdfornecedor($linha->idfornecedor);
+                            $fornecedor->setIdfornecedor($linha->idFornecedor);
                             $fornecedor->setNomeFornecedor($linha->nomeFornecedor);
                             $fornecedor->setRepresentante($linha->representante);
                             $fornecedor->setEmail($linha->email);
-                            $fornecedor->setTelFixo($linha->telfixo);
-                            $fornecedor->setTelCel($linha->telcel);
+                            $fornecedor->setTelFixo($linha->telFixo);
+                            $fornecedor->setTelCel($linha->telCel);
                             $fornecedor->setEndereco($endereco);
                             $lista[$a] = $fornecedor;
                             $a++;
@@ -236,7 +236,7 @@ class DaoFornecedor {
                         . "where fkfornecedor = ?");
                 $stmt->bindParam(1, $id);
                 $stmt->execute();
-                $stmt = $conecta->prepare("delete from produto "
+                $stmt = $conecta->prepare("delete from fornecedor"
                         . "where idfornecedor = ?");
                 $stmt->bindParam(1, $id);
                 $stmt->execute();
@@ -273,15 +273,14 @@ class DaoFornecedor {
                             $endereco->setComplemento($linha->complemento);
                             $endereco->setBairro($linha->bairro);
                             $endereco->setCidade($linha->cidade);
-                            $endereco->setUf($linha->uf);
                             $endereco->setCep($linha->cep);
                             
-                            $fornecedor->setIdfornecedor($linha->idfornecedor);
+                            $fornecedor->setIdfornecedor($linha->idFornecedor);
                             $fornecedor->setNomeFornecedor($linha->nomeFornecedor);
                             $fornecedor->setRepresentante($linha->representante);
                             $fornecedor->setEmail($linha->email);
-                            $fornecedor->setTelFixo($linha->telfixo);
-                            $fornecedor->setTelCel($linha->telcel);
+                            $fornecedor->setTelFixo($linha->telFixo);
+                            $fornecedor->setTelCel($linha->telCel);
                             $fornecedor->setEndereco($endereco);
                         }
                     }
