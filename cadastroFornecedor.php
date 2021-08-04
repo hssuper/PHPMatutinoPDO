@@ -1,5 +1,4 @@
 <?php
-
 include_once 'controller/FornecedorController.php';
 include_once './model/Fornecedor.php';
 include_once './model/Endereco.php';
@@ -192,6 +191,7 @@ $btExcluir = FALSE;
                                            name="nomeFornecedor" 
                                            value="<?php echo $fr->getNomeFornecedor(); ?>">
                                     <label>CEP</label> 
+                                    <label id="valCep" style="color: red; font-size: 11px;"></label>
                                     <input class="form-control" type="text" id="cep" 
                                            onkeypress="mascara(this, '#####-###')" maxlength="9"
                                            value="<?php if($fr->getEndereco()->getCep() != ""){
@@ -413,14 +413,14 @@ $btExcluir = FALSE;
                             else {
                                 //CEP pesquisado não foi encontrado.
                                 limpa_formulário_cep();
-                                alert("** CEP não encontrado."); 
+                                document.getElementById("valCep").innerHTML = "* CEP não encontrado";
                             }
                         });
                     } //end if.
                     else {
                         //cep é inválido.
                         limpa_formulário_cep();
-                        alert("** Formato de CEP inválido.");
+                        document.getElementById("valCep").innerHTML = "* Formato inválido";
 
                     }
                 } //end if.
@@ -434,3 +434,4 @@ $btExcluir = FALSE;
     </script>
 </body>
 </html>
+

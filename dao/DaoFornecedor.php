@@ -33,7 +33,11 @@ class DaoFornecedor {
                 $st->bindParam(2, $logradouro);
                 $st->bindParam(3, $complemento);
                 $linhaEndereco = $st->execute();
-                if($linhaEndereco){
+                if ($st->rowCount() > 0){
+                while($linha = $st->fetch(PDO::FETCH_OBJ)){
+                 $fkEnd = $linha->idendereco;
+                    }
+                
                     
                 }else{
                     $st2 = $conecta->prepare("insert into "
@@ -44,7 +48,11 @@ class DaoFornecedor {
                     $st2->bindParam(4, $cidade);
                     $st2->bindParam(5, $uf);
                     $st2->bindParam(6, $cep);
-                    $st2->execute();
+                    if ($st2->rowCount() > 0){
+                        while($linha = $st2->fetch(PDO::FETCH_OBJ)){
+                         $fkEnd = $linha->idendereco;
+                            }
+                        }
                     
                     $st3 = $conecta->prepare("select idendereco "
                         . "from endereco where cep = ? and "
@@ -53,10 +61,14 @@ class DaoFornecedor {
                     $st3->bindParam(2, $logradouro);
                     $st->bindParam(3, $complemento);
                     $linhaEndereco = $st3->execute();
-                    if($linhaEndereco){
+                    if ($st3->rowCount() > 0){
+                        while($linha = $st3->fetch(PDO::FETCH_OBJ)){
+                         $fkEnd = $linha->idendereco;
+                            }
+                        }
                         
                     }
-                }
+                
                 
                 //processo para inserir dados de fornecedor
                 $stmt = $conecta->prepare("insert into fornecedor values "
@@ -70,7 +82,7 @@ class DaoFornecedor {
                 $stmt->execute();
                 $msg->setMsg("<p style='color: green;'>"
                         . "Dados Cadastrados com sucesso</p>");
-            } catch (Exception $ex) {
+            }catch (Exception $ex) {
                 $msg->setMsg($ex);
             }
         }else{
@@ -80,6 +92,10 @@ class DaoFornecedor {
         $conn = null;
         return $msg;
     }
+  
+}
+    
+
     
     //método para atualizar dados da tabela produto
     public function atualizarFornecedorDAO(Fornecedor $fornecedor){
@@ -248,4 +264,5 @@ class DaoFornecedor {
         }
         return $fornecedor;
     }
-}
+
+
