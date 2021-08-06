@@ -79,7 +79,7 @@ class DaoProduto {
     }
     
     //método para carregar lista de produtos do banco de dados
-    public function listarProdutosDAO(){
+    public function listarProdutoDAO(){
         $conn = new Conecta();
         $conecta = $conn->conectadb();
         $msg = new Mensagem();

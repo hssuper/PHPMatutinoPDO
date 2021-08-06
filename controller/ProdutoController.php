@@ -10,7 +10,7 @@ class ProdutoController
         $vlrCompra,
         $vlrVenda,
         $qtdEstoque,
-        $nomefornecedor,
+        $nomefornecedor
         ) {
         $fornecedor = new Fornecedor();
         $fornecedor->setNomeFornecedor($nomefornecedor);
@@ -36,7 +36,7 @@ class ProdutoController
         $vlrCompra,
         $vlrVenda,
         $qtdEstoque,
-        $nomefornecedor,
+        $nomefornecedor
         ) {
 
         $fornecedor = new Fornecedor();
@@ -56,10 +56,10 @@ class ProdutoController
     }
 
     //método para carregar a lista de produtos que vem da DAO
-    public function listarProdutos()
+    public function listarProduto()
     {
         $daoProduto = new DaoProduto();
-        return $daoProduto->listarProdutosDAO();
+        return $daoProduto->listarProdutoDAO();
     }
 
     //método para excluir produto
