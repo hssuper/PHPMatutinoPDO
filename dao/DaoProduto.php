@@ -9,7 +9,6 @@ class DaoProduto {
     public function inserir(Produto $produto){
         $conn = new Conecta();
         $msg = new Mensagem();
-        
         $conecta = $conn->conectadb();
         if($conecta){
             $nomeProduto = $produto->getNomeProduto();
@@ -18,30 +17,25 @@ class DaoProduto {
             $qtdEstoque = $produto->getQtdEstoque();
             $fornecedor = $produto->getFornecedor();
             try {
-                
-                    
-                    //processo para inserir dados de fornecedor
-                    $stmt = $conecta->prepare("insert into produto values "
-                            . "(null,?,?,?,?,?)");
-                    $stmt->bindParam(1, $$nomeProduto);
-                    $stmt->bindParam(2, $vlrCompra);
-                    $stmt->bindParam(3, $vlrVenda);
-                    $stmt->bindParam(4, $qtdEstoque);
-                    $stmt->bindParam(5, $fornecedor);
-                    $stmt->execute();
-                
-                
-                //$msg->setMsg("<p style='color: green;'>"
-                        //. "Dados Cadastrados com sucesso</p>");
+                $stmt = $conecta->prepare("insert into produto values "
+                        . "(null,?,?,?,?,?)");
+                $stmt->bindParam(1, $nomeProduto);
+                $stmt->bindParam(2, $vlrCompra);
+                $stmt->bindParam(3, $vlrVenda);
+                $stmt->bindParam(4, $qtdEstoque);
+                $stmt->bindParam(5, $fornecedor);
+                $stmt->execute();
+                $msg->setMsg("<p style='color: green;'>"
+                        . "Dados Cadastrados com sucesso</p>");
             } catch (Exception $ex) {
                 $msg->setMsg($ex);
             }
-        }else{
+
+        } else {
             $msg->setMsg("<p style='color: red;'>"
                         . "Erro na conexão com o banco de dados.</p>");
         }
         $conn = null;
-           
         return $msg;
     }
     
@@ -57,9 +51,9 @@ class DaoProduto {
             $vlrVenda = $produto->getVlrVenda();
             $qtdEstoque = $produto->getQtdEstoque();
             $fkFornecedor = $produto->getFornecedor();
-            try{
-                $stmt = $conecta->prepare("update produto set nomeProduto = ?,vlrCompra = ?, vlrVenda = ?, qtdEstoque = ?, fkFornecedor = ? where id = ? ")
-                
+            try {
+                $stmt = $conecta->prepare("update produto set nome = ?, vlrCompra = ?, "
+                        . "vlrVenda = ?, qtdEstoque = ?, fk_Fornecedor = ? where id = ?");
                 $stmt->bindParam(1, $nomeProduto);
                 $stmt->bindParam(2, $vlrCompra);
                 $stmt->bindParam(3, $vlrVenda);
@@ -67,32 +61,30 @@ class DaoProduto {
                 $stmt->bindParam(5, $fkFornecedor);
                 $stmt->bindParam(6, $id);
                 $stmt->execute();
-        
-  
-                $msg->setMsg("<p style='color: green;'>"
-                . "Dados Atualizados com sucesso</p>");
-    } catch (Exception $ex) {
-        $msg->setMsg($ex);
-    }
 
-} else {
-    $msg->setMsg("<p style='color: red;'>"
-                . "Erro na conexão com o banco de dados.</p>");
-}
-$conn = null;
-return $msg;
-}
+                $msg->setMsg("<p style='color: green;'>"
+                        . "Dados Atualizados com sucesso</p>");
+            } catch (Exception $ex) {
+                $msg->setMsg($ex);
+            }
+
+        } else {
+            $msg->setMsg("<p style='color: red;'>"
+                        . "Erro na conexão com o banco de dados.</p>");
+        }
+        $conn = null;
+        return $msg;
+    }
     
     //método para carregar lista de produtos do banco de dados
-    public function listarProdutoDAO(){
+    public function listarProdutosDAO(){
         $conn = new Conecta();
         $conecta = $conn->conectadb();
-        $msg = new Mensagem();
-        if($conecta){
-            try {
+        if ($conecta) {
+            try{
                 $rs = $conecta->query("select * from produto inner join fornecedor "
-                . " on produto.fkfornecedor = fornecedor.idfornecedor"
-            ."order by produto.id");
+                        . "on produto.fk_Fornecedor = fornecedor.idFornecedor "
+                        . "order by produto.id");
                 $lista = array();
                 $a = 0;
                 if($rs->execute()){
@@ -108,43 +100,36 @@ return $msg;
                             $forn = new Fornecedor();
                             $forn->setIdFornecedor($linha->idFornecedor);
                             $forn->setNomeFornecedor($linha->nomeFornecedor);
-                            $forn->setLogradouro($linha->logradouro);
-                            $forn->setComplemneto($linha->complemento);
-                            $forn->setBairro($linha->bairro);
-                            $forn->setCidade($linha->cidade);
-                            $forn->setUf($linha->uf);
-                            $forn->setCep($linha->cep);
+                            
                             $forn->setRepresentante($linha->representante);
                             $forn->setEmail($linha->email);
                             $forn->setTelFixo($linha->telFixo);
                             $forn->setTelCel($linha->telCel);
 
                             $produto->setFornecedor($forn);
-                            
-                            
 
-                            
-                            
                             $lista[$a] = $produto;
                             $a++;
                         }
                     }
                 }
             } catch (Exception $ex) {
-                $msg->setMsg($ex);
+                $msg = 'Lista Feita com primazia.';
+                return $msg + $ex;
             }  
-            $conn = null;           
+            $conn = null;
             return $lista;
         }
-    }
     
+    }
+
     //método para excluir produto na tabela produto
     public function excluirProdutoDAO($id){
         $conn = new Conecta();
         $conecta = $conn->conectadb();
         $msg = new Mensagem();
         if($conecta){
-             try {
+            try {
                 $stmt = $conecta->prepare("delete from produto "
                         . "where id = ?");
                 $stmt->bindParam(1, $id);
@@ -159,6 +144,7 @@ return $msg;
         }
         $conn = null;
         return $msg;
+
     }
     
     //método para os dados de produto por id
@@ -185,12 +171,7 @@ return $msg;
                             $forn = new Fornecedor();
                             $forn->setIdFornecedor($linha->idFornecedor);
                             $forn->setNomeFornecedor($linha->nomeFornecedor);
-                            $forn->setLogradouro($linha->logradouro);
-                            $forn->setComplemneto($linha->complemento);
-                            $forn->setBairro($linha->bairro);
-                            $forn->setCidade($linha->cidade);
-                            $forn->setUf($linha->uf);
-                            $forn->setCep($linha->cep);
+                            
                             $forn->setRepresentante($linha->representante);
                             $forn->setEmail($linha->email);
                             $forn->setTelFixo($linha->telFixo);
