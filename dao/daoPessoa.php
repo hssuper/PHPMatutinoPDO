@@ -121,8 +121,6 @@ class daoPessoa {
                             $pessoa->setPerfil($linha->perfil);
                             $pessoa->setEmail($linha->email);
                             $pessoa->setCpf($linha->cpf);
-                            
-
                             $lista[$a] = $pessoa;
                             $a++;
                         }
