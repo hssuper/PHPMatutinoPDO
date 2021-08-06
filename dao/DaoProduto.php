@@ -17,16 +17,60 @@ class DaoProduto {
             $qtdEstoque = $produto->getQtdEstoque();
             $nomeFornecedor = $produto->getFornecedor()->getNomeFornecedor();
             try {
-                $stmt = $conecta->prepare("insert into produto values "
-                        . "(null,?,?,?,?,?)");
-                $stmt->bindParam(1, $nomeProduto);
-                $stmt->bindParam(2, $vlrCompra);
-                $stmt->bindParam(3, $vlrVenda);
-                $stmt->bindParam(4, $qtdEstoque);
-                $stmt->bindParam(5, $nomeFornecedor);
-                $stmt->execute();
-                $msg->setMsg("<p style='color: green;'>"
-                        . "Dados Cadastrados com sucesso</p>");
+                //processo para pegar o idfornecedor da tabela fornecedor, conforme 
+                //o nomeFornecedor.
+                $st = $conecta->prepare("select idFornecedor "
+                        . "from fornecedor where nomefornecedor = ? "
+                        . " limit 1");
+                $st->bindParam(1, $nomeProduto);
+                $st->bindParam(2, $vlrCompra);
+                $st->bindParam(3, $vlrVenda);
+                $st->bindParam(4, $qtdEstoque);
+                $st->bindParam(5, $nomeFornecedor);
+                if($st->execute()){
+                    if($st->rowCount() > 0){
+                        $msg->setMsg("".$st->rowCount());
+                        while($linha = $st->fetch(PDO::FETCH_OBJ)){
+                            $fkEnd = $linha->idfornecedor;
+                        }
+                        //$msg->setMsg("$fkEnd");
+                    }else{
+                        $st2 = $conecta->prepare("insert into "
+                                . "fornecedor values (null,?)");
+                        $st2->bindParam(1, $nomeFornecedor);
+                        
+                       
+                        $st2->execute();
+
+                        $st3 = $conecta->prepare("select idfornecedor "
+                            . "from fornecedor where nomefornecedor = ? "
+                            . " limit 1");
+                        $st3->bindParam(1, $nomeFornecedor);
+                       
+                        if($st3->execute()){
+                            if($st3->rowCount() > 0){
+                                $msg->setMsg("".$st3->rowCount());
+                                while($linha = $st3->fetch(PDO::FETCH_OBJ)){
+                                    $fkEnd = $linha->idendereco;
+                                }
+                                //$msg->setMsg("$fkEnd");
+                            }
+                        }
+                    }
+                    
+                    //processo para inserir dados de fornecedor
+                    $stmt = $conecta->prepare("insert into produto values "
+                            . "(null,?,?,?,?,?)");
+                    $stmt->bindParam(1, $$nomeProduto);
+                    $stmt->bindParam(2, $vlrCompra);
+                    $stmt->bindParam(3, $vlrVenda);
+                    $stmt->bindParam(4, $qtdEstoque);
+                    $stmt->bindParam(5, $nomeFornecedor);
+                    $stmt->execute();
+                }
+                
+                //$msg->setMsg("<p style='color: green;'>"
+                        //. "Dados Cadastrados com sucesso</p>");
             } catch (Exception $ex) {
                 $msg->setMsg($ex);
             }
@@ -35,6 +79,7 @@ class DaoProduto {
                         . "Erro na conexão com o banco de dados.</p>");
         }
         $conn = null;
+           
         return $msg;
     }
     
