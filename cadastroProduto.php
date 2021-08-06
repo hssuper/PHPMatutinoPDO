@@ -1,10 +1,9 @@
 <?php
-include_once 'C:/xampp/htdocs/phpPDO/phpPDO/PROFESSOR/controller/ProdutoController.php';
-include_once 'C:/xampp/htdocs/phpPDO/phpPDO/PROFESSOR/model/produto.php';
-include_once 'C:/xampp/htdocs/phpPDO/phpPDO/PROFESSOR/model/Mensagem.php';
-include_once 'C:/xampp/htdocs/phpPDO/phpPDO/PROFESSOR/model/fornecedor.php';
-include_once 'C:/xampp/htdocs/phpPDO/phpPDO/PROFESSOR/controller/FornecedorController.php';
-
+include_once 'controller/ProdutoController.php';
+include_once './model/Produto.php';
+include_once './model/Fornecedor.php';
+include_once './model/Mensagem.php';
+include_once 'controller/FornecedorController.php';
 $fcc = new FornecedorController();
 $msg = new Mensagem();
 $pr = new Produto();
