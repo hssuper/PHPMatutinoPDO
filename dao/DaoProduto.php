@@ -9,6 +9,7 @@ class DaoProduto {
     public function inserir(Produto $produto){
         $conn = new Conecta();
         $msg = new Mensagem();
+        
         $conecta = $conn->conectadb();
         if($conecta){
             $nomeProduto = $produto->getNomeProduto();
@@ -66,7 +67,7 @@ class DaoProduto {
                     $stmt->bindParam(2, $vlrCompra);
                     $stmt->bindParam(3, $vlrVenda);
                     $stmt->bindParam(4, $qtdEstoque);
-                    $stmt->bindParam(5, $nomeFornecedor);
+                    $stmt->bindParam(5, $nomeFsornecedor);
                     $stmt->execute();
                 }
                 
