@@ -15,7 +15,7 @@ class DaoProduto {
             $vlrCompra = $produto->getVlrCompra();
             $vlrVenda = $produto->getVlrVenda();
             $qtdEstoque = $produto->getQtdEstoque();
-            $nomeFornecedor = $produto->getFornecedor()->getNomeFornecedor();
+            $nomeFornecedor = $produto->getFornecedor();
             try {
                 //processo para pegar o idfornecedor da tabela fornecedor, conforme 
                 //o nomeFornecedor.
