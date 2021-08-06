@@ -83,8 +83,7 @@ $btExcluir = FALSE;
 
                                 $pc = new PessoController();
                                 unset($_POST['cadastrarPessoa']);
-                                $msg = $pc->inserirPessoa($nome, $dtNasc,
-                                        $login, $senha,$perfil,$email,$cpf );
+                                $msg = $pc->inserirPessoa($nome, $dtNasc, $login, $senha,$perfil,$email,$cpf, $idPessoa );
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroPessoa.php'\">";
@@ -93,7 +92,7 @@ $btExcluir = FALSE;
                         
                         //método para atualizar dados do Pessoa no BD
                         if (isset($_POST['atualizarPessoa'])) {
-                            $nomePessoa = trim($_POST['nomePessoa']);
+                            $nomePessoa = trim($_POST['nome']);
                             if ($nomePessoa != "") {
                                 $fkPessoa = $_POST['idPessoa'];
                                 $dtNasc = $_POST['dtNasc'];
@@ -107,7 +106,7 @@ $btExcluir = FALSE;
 
                                 $pc = new PessoController();
                                 unset($_POST['atualizarPessoa']);
-                                $msg = $pc->atualizarPessoa($id, $nome, $vlrCompra, $vlrVenda, $qtdEstoque,$fkEndereco);
+                                $msg = $pc->atualizarPessoa($idPessoa, $nome, $dtNasc, $login, $senha,$perfil,$email,$cpf);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroPessoa.php'\">";
