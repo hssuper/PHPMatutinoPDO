@@ -11,8 +11,7 @@ class ProdutoController
         $vlrVenda,
         $qtdEstoque,
         $nomefornecedor,
-        
-    ) {
+        ) {
         $fornecedor = new Fornecedor();
         $fornecedor->setNomeFornecedor($nomefornecedor);
        
@@ -38,8 +37,7 @@ class ProdutoController
         $vlrVenda,
         $qtdEstoque,
         $nomefornecedor,
-        
-    ) {
+        ) {
 
         $fornecedor = new Fornecedor();
         $fornecedor->setNomeFornecedor($nomefornecedor);
