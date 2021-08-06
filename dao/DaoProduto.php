@@ -15,7 +15,7 @@ class DaoProduto {
             $vlrCompra = $produto->getVlrCompra();
             $vlrVenda = $produto->getVlrVenda();
             $qtdEstoque = $produto->getQtdEstoque();
-            $fornecedor = $produto->getFornecedor();
+            $nomeFornecedor = $produto->getFornecedor()->getNomeFornecedor();
             try {
                 $stmt = $conecta->prepare("insert into produto values "
                         . "(null,?,?,?,?,?)");
@@ -23,7 +23,7 @@ class DaoProduto {
                 $stmt->bindParam(2, $vlrCompra);
                 $stmt->bindParam(3, $vlrVenda);
                 $stmt->bindParam(4, $qtdEstoque);
-                $stmt->bindParam(5, $fornecedor);
+                $stmt->bindParam(5, $nomeFornecedor);
                 $stmt->execute();
                 $msg->setMsg("<p style='color: green;'>"
                         . "Dados Cadastrados com sucesso</p>");
@@ -102,7 +102,6 @@ class DaoProduto {
                             
                             $forn = new Fornecedor();
                         
-                            $forn->setNomeFornecedor($linha->nomeFornecedor);
                             $forn->setIdfornecedor($linha->idfornecedor);
                            
                             
