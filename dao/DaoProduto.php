@@ -15,7 +15,7 @@ class DaoProduto {
             $vlrCompra = $produto->getVlrCompra();
             $vlrVenda = $produto->getVlrVenda();
             $qtdEstoque = $produto->getQtdEstoque();
-            $fkfornecedor = $produto->getFornecedor();
+            $fornecedor = $produto->getFornecedor();
             try {
                 $stmt = $conecta->prepare("insert into produto values "
                         . "(null,?,?,?,?,?)");
@@ -23,7 +23,7 @@ class DaoProduto {
                 $stmt->bindParam(2, $vlrCompra);
                 $stmt->bindParam(3, $vlrVenda);
                 $stmt->bindParam(4, $qtdEstoque);
-                $stmt->bindParam(5, $fkfornecedor);
+                $stmt->bindParam(5, $fornecedor);
                 $stmt->execute();
                 $msg->setMsg("<p style='color: green;'>"
                         . "Dados Cadastrados com sucesso</p>");
@@ -49,20 +49,20 @@ class DaoProduto {
             $vlrCompra = $produto->getVlrCompra();
             $vlrVenda = $produto->getVlrVenda();
             $qtdEstoque = $produto->getQtdEstoque();
-            $fkFornecedor = $produto->getFornecedor();
+            $Fornecedor = $produto->getFornecedor();
             try{
                 $stmt = $conecta->prepare("update produto set "
                         . "nome = ?,"
                         . "vlrCompra = ?,"
                         . "vlrVenda = ?, "
                         . "qtdEstoque = ?, "
-                        . "fkFornecedor = ? "
+                        . "Fornecedor = ? "
                         . "where id = ?");
                 $stmt->bindParam(1, $nomeProduto);
                 $stmt->bindParam(2, $vlrCompra);
                 $stmt->bindParam(3, $vlrVenda);
                 $stmt->bindParam(4, $qtdEstoque);
-                $stmt->bindParam(5, $fkFornecedor);
+                $stmt->bindParam(5, $Fornecedor);
                 $stmt->bindParam(6, $id);
                 $stmt->execute();
                 $msg->setMsg("<p style='color: blue;'>"
@@ -102,13 +102,11 @@ class DaoProduto {
                             
                             $forn = new Fornecedor();
                         
-                            $forn->setEmail($linha->email);
                             $forn->setNomeFornecedor($linha->nomeFornecedor);
                             $forn->setIdfornecedor($linha->idfornecedor);
-                            $forn->setRepresentante($linha->representante);
-                            $forn->setTelFixo($linha->telfixo);
-                            $forn->setTelCel($linha->telcel);
+                           
                             
+
                             $produto->setFornecedor($forn);
                             
                             $lista[$a] = $produto;
@@ -170,12 +168,10 @@ class DaoProduto {
                             
                             $forn = new Fornecedor();
                            
-                            $forn->setEmail($linha->email);
+                            
                             $forn->setNomeFornecedor($linha->nomeFornecedor);
                             $forn->setIdfornecedor($linha->idfornecedor);
-                            $forn->setRepresentante($linha->representante);
-                            $forn->setTelFixo($linha->telfixo);
-                            $forn->setTelCel($linha->telcel);
+                            
                             
                             $produto->setFornecedor($forn);
                         }
