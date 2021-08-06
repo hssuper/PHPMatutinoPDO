@@ -56,8 +56,7 @@ class ProdutoController
     }
 
     //método para carregar a lista de produtos que vem da DAO
-    public function listarProduto()
-    {
+    public function listarProduto(){
         $daoProduto = new DaoProduto();
         return $daoProduto->listarProdutoDAO();
     }
