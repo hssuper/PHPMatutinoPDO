@@ -2,7 +2,7 @@
 include_once 'controller/PessoaController.php';
 include_once './model/Pessoa.php';
 include_once './model/Mensagem.php';
-
+include_once './model/Endereco.php';
 $pc = new PessoController();
 $msg = new Mensagem();
 $pr = new Pessoa();
