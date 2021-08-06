@@ -37,8 +37,14 @@ class ProdutoController
         $vlrCompra,
         $vlrVenda,
         $qtdEstoque,
-        $fornecedor
+        $nomefornecedor,
+        $idfornecedor
     ) {
+
+        $fornecedor = new Fornecedor();
+        $fornecedor->setNomeFornecedor($nomefornecedor);
+        $fornecedor->setIdfornecedor($idfornecedor);
+
         $produto = new Produto();
         $produto->setIdProduto($id);
         $produto->setNomeProduto($nomeProduto);
