@@ -7,7 +7,6 @@ $pc = new PessoController();
 $msg = new Mensagem();
 $pr = new Pessoa();
 $Pessoa = new Pessoa();
-$pf->setEndereco($Endereco);
 $btEnviar = FALSE;
 $btAtualizar = FALSE;
 $btExcluir = FALSE;
