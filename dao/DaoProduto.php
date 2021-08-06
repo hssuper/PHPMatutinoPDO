@@ -167,7 +167,7 @@ class DaoProduto {
         $msg = new Mensagem();
         if($conecta){
             try {
-                $rs = $conecta->query("SELECT * FROM produto inner join fornecedor "
+                $rs = $conecta->query("SELECT  FROM produto inner join fornecedor "
                         . "on produto.fkFornecedor = fornecedor.idfornecedor "
                         . "order by produto.id desc");
                 $lista = array();
