@@ -11,11 +11,11 @@ class ProdutoController
         $vlrVenda,
         $qtdEstoque,
         $nomefornecedor,
-        $idfornecedor
+        
     ) {
         $fornecedor = new Fornecedor();
         $fornecedor->setNomeFornecedor($nomefornecedor);
-        $fornecedor->setIdfornecedor($idfornecedor);
+       
 
 
         $produto = new Produto();
@@ -38,12 +38,12 @@ class ProdutoController
         $vlrVenda,
         $qtdEstoque,
         $nomefornecedor,
-        $idfornecedor
+        
     ) {
 
         $fornecedor = new Fornecedor();
         $fornecedor->setNomeFornecedor($nomefornecedor);
-        $fornecedor->setIdfornecedor($idfornecedor);
+        
 
         $produto = new Produto();
         $produto->setIdProduto($id);

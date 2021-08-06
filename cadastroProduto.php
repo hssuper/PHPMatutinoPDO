@@ -77,12 +77,11 @@ $btExcluir = FALSE;
                                 $vlrCompra = $_POST['vlrCompra'];
                                 $vlrVenda = $_POST['vlrVenda'];
                                 $qtdEstoque = $_POST['qtdEstoque'];
-                                $fkFornecedor = $_POST['idfornecedor'];                                
+                                $nomefornecedor = $_POST['nomefornecedor'];                                
                                 
                                 $pc = new ProdutoController();
                                 unset($_POST['cadastrarProduto']);
-                                $msg = $pc->inserirProduto($nomeProduto, $vlrCompra,
-                                        $vlrVenda, $qtdEstoque, $fkFornecedor);
+                                $msg = $pc->inserirProduto($nomeProduto, $vlrCompra, $vlrVenda, $qtdEstoque, $nomefornecedor);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroProduto.php'\">";
@@ -97,13 +96,11 @@ $btExcluir = FALSE;
                                 $vlrCompra = $_POST['vlrCompra'];
                                 $vlrVenda = $_POST['vlrVenda'];
                                 $qtdEstoque = $_POST['qtdEstoque'];
-                                $fkFornecedor = $_POST['idfornecedor']; 
+                                $nomefornecedor = $_POST['nomefornecedor']; 
                                 
                                 $pc = new ProdutoController();
                                 unset($_POST['atualizarProduto']);
-                                $msg = $pc->atualizarProduto($id, $nomeProduto, 
-                                        $vlrCompra, $vlrVenda, $qtdEstoque,
-                                        $fkFornecedor);
+                                $msg = $pc->atualizarProduto($id, $nomeProduto,  $vlrCompra, $vlrVenda, $qtdEstoque, $nomefornecedor);
                                 echo $msg->getMsg();
                                 $pr = null;
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
