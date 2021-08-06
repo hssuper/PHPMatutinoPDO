@@ -77,11 +77,11 @@ $btExcluir = FALSE;
                                 $vlrCompra = $_POST['vlrCompra'];
                                 $vlrVenda = $_POST['vlrVenda'];
                                 $qtdEstoque = $_POST['qtdEstoque'];
-                                $nomefornecedor = $_POST['nomefornecedor'];
+                                $idfornecedor = $_POST['idfornecedor'];
                                 
                                 $pc = new ProdutoController();
                                 unset($_POST['cadastrarProduto']);
-                                $msg = $pc->inserirProduto($nomeProduto, $vlrCompra, $vlrVenda, $qtdEstoque, $nomefornecedor);
+                                $msg = $pc->inserirProduto($nomeProduto, $vlrCompra, $vlrVenda, $qtdEstoque, $idfornecedor);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroProduto.php'\">";
@@ -96,11 +96,11 @@ $btExcluir = FALSE;
                                 $vlrCompra = $_POST['vlrCompra'];
                                 $vlrVenda = $_POST['vlrVenda'];
                                 $qtdEstoque = $_POST['qtdEstoque'];
-                                $nomefornecedor = $_POST['nomefornecedor']; 
+                                $idfornecedor = $_POST['idfornecedor']; 
                                 
                                 $pc = new ProdutoController();
                                 unset($_POST['atualizarProduto']);
-                                $msg = $pc->atualizarProduto($id, $nomeProduto,  $vlrCompra, $vlrVenda, $qtdEstoque, $nomefornecedor);
+                                $msg = $pc->atualizarProduto($id, $nomeProduto,  $vlrCompra, $vlrVenda, $qtdEstoque, $idfornecedor);
                                 echo $msg->getMsg();
                                 $pr = null;
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;

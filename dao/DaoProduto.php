@@ -16,49 +16,9 @@ class DaoProduto {
             $vlrCompra = $produto->getVlrCompra();
             $vlrVenda = $produto->getVlrVenda();
             $qtdEstoque = $produto->getQtdEstoque();
-            $nomeFornecedor = $produto->getFornecedor();
+            $fornecedor = $produto->getFornecedor();
             try {
-                //processo para pegar o idfornecedor da tabela fornecedor, conforme 
-                //o nomeFornecedor.
-                $st = $conecta->prepare("select idFornecedor "
-                        . "from fornecedor where nomefornecedor = ? "
-                        . " limit 1");
-                $st->bindParam(1, $nomeProduto);
-                $st->bindParam(2, $vlrCompra);
-                $st->bindParam(3, $vlrVenda);
-                $st->bindParam(4, $qtdEstoque);
-                $st->bindParam(5, $nomeFornecedor);
-                $fkfnc = "";
-                if($st->execute()){
-                    if($st->rowCount() > 0){
-                        $msg->setMsg("".$st->rowCount());
-                        while($linha = $st->fetch(PDO::FETCH_OBJ)){
-                            $fkfnc = $linha->idfornecedor;
-                        }
-                        //$msg->setMsg("$fkEnd");
-                    }else{
-                        $st2 = $conecta->prepare("insert into "
-                                . "fornecedor values (null,?)");
-                        $st2->bindParam(1, $nomeFornecedor);
-                        
-                       
-                        $st2->execute();
-
-                        $st3 = $conecta->prepare("select idfornecedor "
-                            . "from fornecedor where nomefornecedor = ? "
-                            . " limit 1");
-                        $st3->bindParam(1, $nomeFornecedor);
-                       
-                        if($st3->execute()){
-                            if($st3->rowCount() > 0){
-                                $msg->setMsg("".$st3->rowCount());
-                                while($linha = $st3->fetch(PDO::FETCH_OBJ)){
-                                    $fkfnc = $linha->idfornecedor;
-                                }
-                                //$msg->setMsg("$fkEnd");
-                            }
-                        }
-                    }
+                
                     
                     //processo para inserir dados de fornecedor
                     $stmt = $conecta->prepare("insert into produto values "
@@ -67,9 +27,9 @@ class DaoProduto {
                     $stmt->bindParam(2, $vlrCompra);
                     $stmt->bindParam(3, $vlrVenda);
                     $stmt->bindParam(4, $qtdEstoque);
-                    $stmt->bindParam(5, $nomeFsornecedor);
+                    $stmt->bindParam(5, $fornecedor);
                     $stmt->execute();
-                }
+                
                 
                 //$msg->setMsg("<p style='color: green;'>"
                         //. "Dados Cadastrados com sucesso</p>");
@@ -96,70 +56,32 @@ class DaoProduto {
             $vlrCompra = $produto->getVlrCompra();
             $vlrVenda = $produto->getVlrVenda();
             $qtdEstoque = $produto->getQtdEstoque();
-            $nomeFornecedor = $produto->getFornecedor()->getNomeFornecedor();
+            $fkFornecedor = $produto->getFornecedor();
             try{
-                $st = $conecta->prepare("select idfornecedor "
-                . "from fornecedor where nomefornecedor = ?  "
-                . " limit 1");
-        $st->bindParam(1, $nomefornecedor);
-        
-        $id = "";
-        if($st->execute()){
-            if($st->rowCount() > 0){
-                //$msg->setMsg("".$st->rowCount());
-                while($linha = $st->fetch(PDO::FETCH_OBJ)){
-                    $id = $linha->idendereco;
-                }
-                //$msg->setMsg("$fkEnd");
-            }else{
-                $st2 = $conecta->prepare("insert into "
-                        . "fornecedor values (null,?)");
-                        $st2->bindParam(1, $nomeFornecedor);
-                $st2->execute();
+                $stmt = $conecta->prepare("update produto set nomeProduto = ?,vlrCompra = ?, vlrVenda = ?, qtdEstoque = ?, fkFornecedor = ? where id = ? ")
                 
-                $st3 = $conecta->prepare("select idfornecedor "
-                    . "from fornecedor where nomefornecedor = ?  "
-                    . " limit 1");
-                    $st3->bindParam(1, $nomeFornecedor);
-                
-                if($st3->execute()){
-                    if($st3->rowCount() > 0){
-                        $linha = $st3->fetch(PDO::FETCH_OBJ);
-                        $fkfnc = $linha->idendereco;
-                    }
-                }
-            }
-        }
-
-
-
-
-                $stmt = $conecta->prepare("update produto set "
-                        . "nome = ?,"
-                        . "vlrCompra = ?,"
-                        . "vlrVenda = ?, "
-                        . "qtdEstoque = ?, "
-                        . "nomeFornecedor = ? "
-                        . "where id = ?");
                 $stmt->bindParam(1, $nomeProduto);
                 $stmt->bindParam(2, $vlrCompra);
                 $stmt->bindParam(3, $vlrVenda);
                 $stmt->bindParam(4, $qtdEstoque);
-                $stmt->bindParam(5, $nomeFornecedor);
+                $stmt->bindParam(5, $fkFornecedor);
                 $stmt->bindParam(6, $id);
                 $stmt->execute();
-                $msg->setMsg("<p style='color: blue;'>"
-                        . "Dados atualizados com sucesso</p>");
-            } catch (Exception $ex) {
-                $msg->setMsg($ex);
-            }
-        }else{
-            $msg->setMsg("<p style='color: red;'>"
-                        . "Erro na conexão com o banco de dados.</p>");
-        }
-        $conn = null;
-        return $msg;
+        
+  
+                $msg->setMsg("<p style='color: green;'>"
+                . "Dados Atualizados com sucesso</p>");
+    } catch (Exception $ex) {
+        $msg->setMsg($ex);
     }
+
+} else {
+    $msg->setMsg("<p style='color: red;'>"
+                . "Erro na conexão com o banco de dados.</p>");
+}
+$conn = null;
+return $msg;
+}
     
     //método para carregar lista de produtos do banco de dados
     public function listarProdutoDAO(){
@@ -169,22 +91,35 @@ class DaoProduto {
         if($conecta){
             try {
                 $rs = $conecta->query("select * from produto inner join fornecedor "
-                . " on produto.fkfornecedor = fornecedor.idfornecedor");
+                . " on produto.fkfornecedor = fornecedor.idfornecedor"
+            ."order by produto.id");
                 $lista = array();
                 $a = 0;
                 if($rs->execute()){
                     if($rs->rowCount() > 0){
                         while($linha = $rs->fetch(PDO::FETCH_OBJ)){
-                            $forn = new Fornecedor();
-                            $forn->setIdfornecedor($linha->idfornecedor);
-                            
-                            
                             $produto = new Produto();
                             $produto->setIdProduto($linha->id);
                             $produto->setNomeProduto($linha->nome);
                             $produto->setVlrCompra($linha->vlrCompra);
                             $produto->setVlrVenda($linha->vlrVenda);
                             $produto->setQtdEstoque($linha->qtdEstoque);
+
+                            $forn = new Fornecedor();
+                            $forn->setIdFornecedor($linha->idFornecedor);
+                            $forn->setNomeFornecedor($linha->nomeFornecedor);
+                            $forn->setLogradouro($linha->logradouro);
+                            $forn->setComplemneto($linha->complemento);
+                            $forn->setBairro($linha->bairro);
+                            $forn->setCidade($linha->cidade);
+                            $forn->setUf($linha->uf);
+                            $forn->setCep($linha->cep);
+                            $forn->setRepresentante($linha->representante);
+                            $forn->setEmail($linha->email);
+                            $forn->setTelFixo($linha->telFixo);
+                            $forn->setTelCel($linha->telCel);
+
+                            $produto->setFornecedor($forn);
                             
                             
 
@@ -229,14 +164,14 @@ class DaoProduto {
     //método para os dados de produto por id
     public function pesquisarProdutoIdDAO($id){
         $conn = new Conecta();
-        $conecta = $conn->conectadb();
         $msg = new Mensagem();
+        $conecta = $conn->conectadb();
         $produto = new Produto();
         if($conecta){
             try {
                 $rs = $conecta->prepare("select * from produto inner join "
-                        . "fornecedor on produto.fkFornecedor = fornecedor.idfornecedor "
-                        . "where produto.id = ?");
+                                . "fornecedor on produto.fk_Fornecedor = fornecedor.idFornecedor "
+                                . "where produto.id = ? ");
                 $rs->bindParam(1, $id);
                 if($rs->execute()){
                     if($rs->rowCount() > 0){
@@ -246,26 +181,36 @@ class DaoProduto {
                             $produto->setVlrCompra($linha->vlrCompra);
                             $produto->setVlrVenda($linha->vlrVenda);
                             $produto->setQtdEstoque($linha->qtdEstoque);
-                            
+
                             $forn = new Fornecedor();
-                           
-                            
+                            $forn->setIdFornecedor($linha->idFornecedor);
                             $forn->setNomeFornecedor($linha->nomeFornecedor);
-                            $forn->setIdfornecedor($linha->idfornecedor);
-                            
-                            
+                            $forn->setLogradouro($linha->logradouro);
+                            $forn->setComplemneto($linha->complemento);
+                            $forn->setBairro($linha->bairro);
+                            $forn->setCidade($linha->cidade);
+                            $forn->setUf($linha->uf);
+                            $forn->setCep($linha->cep);
+                            $forn->setRepresentante($linha->representante);
+                            $forn->setEmail($linha->email);
+                            $forn->setTelFixo($linha->telFixo);
+                            $forn->setTelCel($linha->telCel);
+
                             $produto->setFornecedor($forn);
+
                         }
                     }
                 }
             } catch (Exception $ex) {
-                $msg->setMsg($ex);
+                $msg = 'Pesquisa Feita com primazia.';
+                return $msg + $ex;
             }  
             $conn = null;
+            
         }else{
             echo "<script>alert('Banco inoperante!')</script>";
             echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"0;
-			 URL='../PHPMatutinoPDO/cadastroProduto.php'\">"; 
+            URL='http://localhost/phpPDO/phpPDO/PROFESSOR/view/cadastroProduto.php\">";
         }
         return $produto;
     }
