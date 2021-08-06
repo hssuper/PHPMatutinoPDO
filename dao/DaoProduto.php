@@ -167,14 +167,17 @@ class DaoProduto {
         $msg = new Mensagem();
         if($conecta){
             try {
-                $rs = $conecta->query("SELECT  FROM produto inner join fornecedor "
-                        . "on produto.fkFornecedor = fornecedor.idfornecedor "
-                        . "order by produto.id desc");
+                $rs = $conecta->query("select * from produto inner join fornecedor "
+                . " on produto.fkfornecedor = fornecedor.idfornecedor");
                 $lista = array();
                 $a = 0;
                 if($rs->execute()){
                     if($rs->rowCount() > 0){
                         while($linha = $rs->fetch(PDO::FETCH_OBJ)){
+                            $forn = new Fornecedor();
+                            $forn->setIdfornecedor($linha->idfornecedor);
+                            
+                            
                             $produto = new Produto();
                             $produto->setIdProduto($linha->id);
                             $produto->setNomeProduto($linha->nome);
@@ -182,13 +185,9 @@ class DaoProduto {
                             $produto->setVlrVenda($linha->vlrVenda);
                             $produto->setQtdEstoque($linha->qtdEstoque);
                             
-                            $forn = new Fornecedor();
-                        
-                            $forn->setIdfornecedor($linha->idfornecedor);
-                           
                             
 
-                            $produto->setFornecedor($forn);
+                            
                             
                             $lista[$a] = $produto;
                             $a++;
