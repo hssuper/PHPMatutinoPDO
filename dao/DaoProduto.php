@@ -27,11 +27,12 @@ class DaoProduto {
                 $st->bindParam(3, $vlrVenda);
                 $st->bindParam(4, $qtdEstoque);
                 $st->bindParam(5, $nomeFornecedor);
+                $fkfnc = "";
                 if($st->execute()){
                     if($st->rowCount() > 0){
                         $msg->setMsg("".$st->rowCount());
                         while($linha = $st->fetch(PDO::FETCH_OBJ)){
-                            $fkEnd = $linha->idfornecedor;
+                            $fkfnc = $linha->idfornecedor;
                         }
                         //$msg->setMsg("$fkEnd");
                     }else{
@@ -51,7 +52,7 @@ class DaoProduto {
                             if($st3->rowCount() > 0){
                                 $msg->setMsg("".$st3->rowCount());
                                 while($linha = $st3->fetch(PDO::FETCH_OBJ)){
-                                    $fkEnd = $linha->idendereco;
+                                    $fkfnc = $linha->idfornecedor;
                                 }
                                 //$msg->setMsg("$fkEnd");
                             }
@@ -111,25 +112,19 @@ class DaoProduto {
                 //$msg->setMsg("$fkEnd");
             }else{
                 $st2 = $conecta->prepare("insert into "
-                        . "endereco values (null,?,?,?,?,?,?)");
-                $st2->bindParam(1, $logradouro);
-                $st2->bindParam(2, $complemento);
-                $st2->bindParam(3, $bairro);
-                $st2->bindParam(4, $cidade);
-                $st2->bindParam(5, $uf);
-                $st2->bindParam(6, $cep);
+                        . "fornecedor values (null,?)");
+                        $st2->bindParam(1, $nomeFornecedor);
                 $st2->execute();
                 
-                $st3 = $conecta->prepare("select idendereco "
-                    . "from endereco where cep = ? and "
-                    . "logradouro = ? and complemento = ? limit 1");
-                $st3->bindParam(1, $cep);
-                $st3->bindParam(2, $logradouro);
-                $st3->bindParam(3, $complemento);
+                $st3 = $conecta->prepare("select idfornecedor "
+                    . "from fornecedor where nomefornecedor = ?  "
+                    . " limit 1");
+                    $st3->bindParam(1, $nomeFornecedor);
+                
                 if($st3->execute()){
                     if($st3->rowCount() > 0){
                         $linha = $st3->fetch(PDO::FETCH_OBJ);
-                        $fkEnd = $linha->idendereco;
+                        $fkfnc = $linha->idendereco;
                     }
                 }
             }
