@@ -77,7 +77,7 @@ $btExcluir = FALSE;
                                 $vlrCompra = $_POST['vlrCompra'];
                                 $vlrVenda = $_POST['vlrVenda'];
                                 $qtdEstoque = $_POST['qtdEstoque'];
-                                $nomefornecedor = $_POST['fornecedor'];
+                                $nomefornecedor = $_POST['nomefornecedor'];
                                 
                                 $pc = new ProdutoController();
                                 unset($_POST['cadastrarProduto']);
