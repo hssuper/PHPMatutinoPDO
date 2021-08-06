@@ -187,11 +187,6 @@ $btExcluir = FALSE;
                                            <label>Cpf</label>  
                                     <input class="form-control" type="text" 
                                            value="<?php echo $pr->getCpf(); ?>" name="cpf">
-                                           <label>Endereco</label>  
-                                    
-
-                                          }
-                                        ?>
                                     </select>
                                     <input type="submit" name="cadastrarPessoa"
                                            class="btn btn-success btInput" value="Enviar"
@@ -256,7 +251,6 @@ $btExcluir = FALSE;
                                     <th>perfil</th>
                                     <th>Email</th>
                                     <th>Cpf</th>
-                                    <th>Endereco</th>
                                     <th>Ações</th></tr>
                             </thead>
                             <tbody>
