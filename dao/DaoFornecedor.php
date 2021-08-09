@@ -232,10 +232,8 @@ class DaoFornecedor {
         $msg = new Mensagem();
         if($conecta){
              try {
-                $stmt = $conecta->prepare("delete from produto "
-                        . "where fkfornecedor = ?");
-                $stmt->bindParam(1, $id);
-                $stmt->execute();
+               
+                
                 $stmt = $conecta->prepare("delete from fornecedor"
                         . "where idfornecedor = ?");
                 $stmt->bindParam(1, $id);
