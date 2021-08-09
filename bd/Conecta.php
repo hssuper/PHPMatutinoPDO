@@ -7,7 +7,7 @@ class Conecta {
         try{
             $pdo = new PDO("mysql:host=localhost;dbname=phpmatutinopdo", 
                     "root", "senac");
-        } catch (Exception $ex) {
+        } catch (PDOException $ex) {
             echo "<script>alert('Erro na conexão com o "
             . "banco de dados.')</script>";
         }   
