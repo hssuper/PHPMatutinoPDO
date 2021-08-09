@@ -92,7 +92,7 @@ $btExcluir = FALSE;
                         if (isset($_POST['atualizarProduto'])) {
                             $nomeProduto = trim($_POST['nomeProduto']);
                             if ($nomeProduto != "") {
-                                $id = $_POST['idproduto'];
+                                $id = $_POST['idProduto'];
                                 $vlrCompra = $_POST['vlrCompra'];
                                 $vlrVenda = $_POST['vlrVenda'];
                                 $qtdEstoque = $_POST['qtdEstoque'];
@@ -110,7 +110,7 @@ $btExcluir = FALSE;
                         
                         if (isset($_POST['excluir'])) {
                             if ($pr != null) {
-                                $id = $_POST['ide'];
+                                $id = $_POST['idProduto'];
                                 
                                 $pc = new ProdutoController();
                                 unset($_POST['excluir']);
@@ -123,7 +123,7 @@ $btExcluir = FALSE;
                         
                         if (isset($_POST['excluirProduto'])) {
                             if ($pr != null) {
-                                $id = $_POST['idproduto'];
+                                $id = $_POST['idProduto'];
                                 unset($_POST['excluirProduto']);
                                 $pc = new ProdutoController();
                                 $msg = $pc->excluirProduto($id);
@@ -135,7 +135,7 @@ $btExcluir = FALSE;
 
                         if (isset($_POST['limpar'])) {
                             $pr = null;
-                            unset($_GET['id']);
+                            unset($_GET['idProduto']);
                             header("Location: cadastroProduto.php");
                         }
                         if (isset($_GET['id'])) {
@@ -144,7 +144,7 @@ $btExcluir = FALSE;
                             $btExcluir = TRUE;
                             $id = $_GET['id'];
                             $pc = new ProdutoController();
-                            $pr = $pc->pesquisarProdutoId($id);
+                            $pr = $pc->pesquisarProdutoId($idProduto);
                         }
                         ?>
                         <form method="post" action="">
