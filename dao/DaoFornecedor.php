@@ -235,7 +235,7 @@ class DaoFornecedor {
                
                 
                 $stmt = $conecta->prepare("delete from fornecedor"
-                        . "where idfornecedor = ?");
+                        . "where idFornecedor = ?");
                 $stmt->bindParam(1, $id);
                 $stmt->execute();
                 $msg->setMsg("<p style='color: #d6bc71;'>"
@@ -243,6 +243,7 @@ class DaoFornecedor {
             } catch (Exception $ex) {
                 $msg->setMsg($ex);
             }
+            
         }else{
             $msg->setMsg("<p style='color: red;'>'Banco inoperante!'</p>"); 
         }
