@@ -53,7 +53,7 @@ class DaoProduto {
             $fkFornecedor = $produto->getFornecedor();
             try {
                 $stmt = $conecta->prepare("update produto set nome = ?, vlrCompra = ?, "
-                        . "vlrVenda = ?, qtdEstoque = ?, fk_Fornecedor = ? where id = ?");
+                        . "vlrVenda = ?, qtdEstoque = ?, fkFornecedor = ? where id = ?");
                 $stmt->bindParam(1, $nomeProduto);
                 $stmt->bindParam(2, $vlrCompra);
                 $stmt->bindParam(3, $vlrVenda);
@@ -83,7 +83,7 @@ class DaoProduto {
         if ($conecta) {
             try{
                 $rs = $conecta->query("select * from produto inner join fornecedor "
-                        . "on produto.fk_Fornecedor = fornecedor.idFornecedor "
+                        . "on produto.fkFornecedor = fornecedor.idFornecedor "
                         . "order by produto.id");
                 $lista = array();
                 $a = 0;
@@ -156,7 +156,7 @@ class DaoProduto {
         if($conecta){
             try {
                 $rs = $conecta->prepare("select * from produto inner join "
-                                . "fornecedor on produto.fk_Fornecedor = fornecedor.idFornecedor "
+                                . "fornecedor on produto.fkFornecedor = fornecedor.idFornecedor "
                                 . "where produto.id = ? ");
                 $rs->bindParam(1, $id);
                 if($rs->execute()){
