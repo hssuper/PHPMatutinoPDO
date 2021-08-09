@@ -231,19 +231,20 @@ class DaoFornecedor {
         $conecta = $conn->conectadb();
         $msg = new Mensagem();
         if($conecta){
-            /* try {
+             try {
                
                 
-                $stmt = $conecta->prepare("delete from fornecedor"
-                        . "where idfornecedor = ?");
+                $stmt = $conecta->prepare("delete from fornecedor "
+                        . "where idFornecedor = ?");
                 $stmt->bindParam(1, $id);
                 $stmt->execute();
                 $msg->setMsg("<p style='color: #d6bc71;'>"
                         . "Dados excluídos com sucesso.</p>");
             } catch (Exception $ex) {
                 $msg->setMsg($ex);
-            }*/
-            $msg->setMsg($id);
+            }
+           // $msg->setMsg($id);
+
         }else{
             $msg->setMsg("<p style='color: red;'>'Banco inoperante!'</p>"); 
         }
