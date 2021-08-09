@@ -195,7 +195,7 @@ $btExcluir = FALSE;
                                     <input class="form-control" type="text" id="cep" 
                                            onkeypress="mascara(this, '#####-###')" maxlength="9"
                                            value="<?php if($fr->getEndereco()->getCep() != ""){
-                                            echo $fr->getEndereco->getCep();} ?>" name="cep">
+                                            echo $fr->getEndereco()->getCep();} ?>" name="cep">
                                     <label>Rua/Logradouro</label>  
                                     <input class="form-control" type="text" id="rua"
                                            value="<?php echo $fr->getEndereco()->getLogradouro(); ?>" name="logradouro">   

@@ -273,6 +273,7 @@ class DaoFornecedor {
                             $endereco->setComplemento($linha->complemento);
                             $endereco->setBairro($linha->bairro);
                             $endereco->setCidade($linha->cidade);
+                            $endereco->setUf($linha->uf);
                             $endereco->setCep($linha->cep);
                             
                             $fornecedor->setIdfornecedor($linha->idFornecedor);
