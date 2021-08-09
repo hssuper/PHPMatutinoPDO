@@ -19,10 +19,10 @@ return $daoProduto->inserir($produto);
 }
 
 //método para atualizar dados de produto no BD
-public function atualizarProduto($id, $nomeProduto, $vlrCompra, 
+public function atualizarProduto($idProduto, $nomeProduto, $vlrCompra, 
     $vlrVenda, $qtdEstoque, $fkfornecedor){
 $produto = new Produto();
-$produto->setIdProduto($id);
+$produto->setIdProduto($idProduto);
 $produto->setNomeProduto($nomeProduto);
 $produto->setVlrCompra($vlrCompra);
 $produto->setVlrVenda($vlrVenda);
