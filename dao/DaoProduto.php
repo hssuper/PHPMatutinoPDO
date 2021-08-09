@@ -91,8 +91,8 @@ class DaoProduto {
                     if($rs->rowCount() > 0){
                         while($linha = $rs->fetch(PDO::FETCH_OBJ)){
                             $produto = new Produto();
-                            $produto->setIdProduto($linha->id);
-                            $produto->setNomeProduto($linha->nome);
+                            $produto->setIdProduto($linha->idProduto);
+                            $produto->setNomeProduto($linha->nomeProduto);
                             $produto->setVlrCompra($linha->vlrCompra);
                             $produto->setVlrVenda($linha->vlrVenda);
                             $produto->setQtdEstoque($linha->qtdEstoque);
@@ -162,8 +162,8 @@ class DaoProduto {
                 if($rs->execute()){
                     if($rs->rowCount() > 0){
                         while($linha = $rs->fetch(PDO::FETCH_OBJ)){
-                            $produto->setIdProduto($linha->id);
-                            $produto->setNomeProduto($linha->nome);
+                            $produto->setIdProduto($linha->idProduto);
+                            $produto->setNomeProduto($linha->nomeProduto);
                             $produto->setVlrCompra($linha->vlrCompra);
                             $produto->setVlrVenda($linha->vlrVenda);
                             $produto->setQtdEstoque($linha->qtdEstoque);
