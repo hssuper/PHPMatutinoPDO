@@ -108,7 +108,7 @@ $btExcluir = FALSE;
                                 $msg = $pc->atualizarPessoa($idPessoa, $nome, $dtNasc, $login, $senha,$perfil,$email,$cpf);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
-                                    URL='cadastroPessoa.php'\">";
+                                    URL='cadastro.php'\">";
                             }
                         }
                         
@@ -121,7 +121,7 @@ $btExcluir = FALSE;
                                 $msg = $pc->excluirPessoa($id);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
-                                    URL='cadastroPessoa.php'\">";
+                                    URL='cadastro.php'\">";
                             }
                         }
                         
@@ -133,14 +133,14 @@ $btExcluir = FALSE;
                                 $msg = $pc->excluirPessoa($id);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
-                                    URL='cadastroPessoa.php'\">";
+                                    URL='cadastro.php'\">";
                             }
                         }
 
                         if (isset($_POST['limpar'])) {
                             $pr = null;
                             unset($_GET['id']);
-                            header("Location: cadastroPessoa.php");
+                            header("Location: cadastro.php");
                         }
                         if (isset($_GET['id'])) {
                             $btEnviar = TRUE;
@@ -273,7 +273,7 @@ $btExcluir = FALSE;
                                             <td><?php print_r($lp->getCpf()); ?></td>
                                             
                                             
-                                            <td><a href="cadastroPessoa.php?id=<?php echo $lp->getIdPessoa(); ?>"
+                                            <td><a href="cadastro.php?id=<?php echo $lp->getIdPessoa(); ?>"
                                                    class="btn btn-light">
                                                     <img src="img/edita.png" width="32"></a>
                                                 </form>
