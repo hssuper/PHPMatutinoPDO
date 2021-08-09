@@ -34,9 +34,9 @@ return $daoProduto->atualizarProdutoDAO($produto);
 }
 
 //método para carregar a lista de produtos que vem da DAO
-public function listarProdutos(){
+public function listarProduts(){
 $daoProduto = new DaoProduto();
-return $daoProduto->listarProdutosDAO();
+return $daoProduto->listarProdutsDAO();
 }
 
 //método para carregar a lista de produtos que vem da DAO
