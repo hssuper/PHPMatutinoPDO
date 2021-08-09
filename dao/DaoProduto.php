@@ -87,7 +87,7 @@ class DaoProduto {
                         . "order by produto.id");
                 $lista = array();
                 $a = 0;
-                if($rs->execute());{
+                if($rs->execute()){
                     if($rs->rowCount() > 0){
                         while($linha = $rs->fetch(PDO::FETCH_OBJ)){
                             $produto = new Produto();
