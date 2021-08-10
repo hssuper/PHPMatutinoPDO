@@ -8,7 +8,7 @@ class FornecedorController {
             $complemento, $bairro, $cidade, $uf, $cep,
             $representante, $email, $telFixo, $telCel){
         
-        $endereco = new Endereco();
+        $endereco = new fkEndereco();
         $endereco->setCep($cep);
         $endereco->setLogradouro($logradouro);
         $endereco->setComplemento($complemento);
@@ -35,7 +35,7 @@ class FornecedorController {
             $cep, $representante, $email, $telFixo, $telCel){
         
 
-        $endereco = new Endereco();
+        $endereco = new fkEndereco();
         $endereco->setCep($cep);
         $endereco->setLogradouro($logradouro);
         $endereco->setComplemento($complemento);
