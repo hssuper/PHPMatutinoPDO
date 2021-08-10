@@ -1,6 +1,6 @@
 <?php
 
-class Endereco {
+class fkEndereco {
     private $idendereco;
     private $cep;
     private $logradouro;

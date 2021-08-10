@@ -192,18 +192,20 @@ class DaoFornecedor {
                 $rs = $conecta->query("select * from fornecedor inner join endereco "
                         . " on fornecedor.fkendereco = endereco.idendereco");
                 $lista = array();
+
                 $a = 0;
+                
                 if($rs->execute()){
                     if($rs->rowCount() > 0){
                         while($linha = $rs->fetch(PDO::FETCH_OBJ)){
-                            $endereco = new Endereco();
+                            $endereco = new fkEndereco();
                             $endereco->setLogradouro($linha->logradouro);
                             $endereco->setComplemento($linha->complemento);
                             $endereco->setBairro($linha->bairro);
                             $endereco->setCidade($linha->cidade);
                             $endereco->setUf($linha->uf);
                             $endereco->setCep($linha->cep);
-                            
+
                             $fornecedor = new Fornecedor();
                             $fornecedor->setIdfornecedor($linha->idFornecedor);
                             $fornecedor->setNomeFornecedor($linha->nomeFornecedor);
@@ -212,6 +214,7 @@ class DaoFornecedor {
                             $fornecedor->setTelFixo($linha->telFixo);
                             $fornecedor->setTelCel($linha->telCel);
                             $fornecedor->setEndereco($endereco);
+
                             $lista[$a] = $fornecedor;
                             $a++;
                         }
@@ -268,7 +271,7 @@ class DaoFornecedor {
                     if($rs->rowCount() > 0){
                         while($linha = $rs->fetch(PDO::FETCH_OBJ)){
                             
-                            $endereco = new Endereco();
+                            $endereco = new fkEndereco();
                             $endereco->setLogradouro($linha->logradouro);
                             $endereco->setComplemento($linha->complemento);
                             $endereco->setBairro($linha->bairro);
@@ -276,6 +279,7 @@ class DaoFornecedor {
                             $endereco->setUf($linha->uf);
                             $endereco->setCep($linha->cep);
                             
+                            $fornecedor = new Fornecedor();
                             $fornecedor->setIdfornecedor($linha->idFornecedor);
                             $fornecedor->setNomeFornecedor($linha->nomeFornecedor);
                             $fornecedor->setRepresentante($linha->representante);

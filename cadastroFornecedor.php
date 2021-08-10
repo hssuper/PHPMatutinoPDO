@@ -4,7 +4,7 @@ include_once './model/Fornecedor.php';
 include_once './model/Endereco.php';
 include_once './model/Mensagem.php';
 $msg = new Mensagem();
-$en = new Endereco();
+$en = new fkEndereco();
 $fr = new Fornecedor();
 $fr->setEndereco($en);
 $btEnviar = FALSE;
@@ -194,8 +194,7 @@ $btExcluir = FALSE;
                                     <label id="valCep" style="color: red; font-size: 11px;"></label>
                                     <input class="form-control" type="text" id="cep" 
                                            onkeypress="mascara(this, '#####-###')" maxlength="9"
-                                           value="<?php if($fr->getEndereco()->getCep() != ""){
-                                            echo $fr->getEndereco()->getCep();} ?>" name="cep">
+                                           value="<?php echo $fr->getEndereco()->getCep(); ?>" name="cep">
                                     <label>Rua/Logradouro</label>  
                                     <input class="form-control" type="text" id="rua"
                                            value="<?php echo $fr->getEndereco()->getLogradouro(); ?>" name="logradouro">   

@@ -15,7 +15,12 @@ class daoPessoa {
         $conecta = $conn->conectadb();
         if($conecta){
             
-
+            $logradouro = $pessoa->getfkEndereco()->getLogradouro();
+            $complemento = $pessoa->getfkEndereco()->getComplemento();
+            $bairro = $pessoa->getfkEndereco()->getBairro();
+            $cidade = $pessoa->getfkEndereco()->getCidade();
+            $uf = $pessoa->getfkEndereco()->getUf();
+            $cep = $pessoa->getfkEndereco()->getCep();
 
             $nome = $pessoa->getNome();
             $dtNasc = $pessoa->getDtNasc();
@@ -27,8 +32,52 @@ class daoPessoa {
             
 
             try {
+
+                    //processo para pegar o idendereco da tabela endereco, conforme 
+                    //o cep, o logradouro e o complemento informado.
+                    $st = $conecta->prepare("select idendereco "
+                            . "from endereco where cep = ? and "
+                            . "logradouro = ? and complemento = ? limit 1");
+                    $st->bindParam(1, $cep);
+                    $st->bindParam(2, $logradouro);
+                    $st->bindParam(3, $complemento);
+                    if($st->execute()){
+                        if($st->rowCount() > 0){
+                            $msg->setMsg("".$st->rowCount());
+                            while($linha = $st->fetch(PDO::FETCH_OBJ)){
+                                $fkEnd = $linha->idendereco;
+                            }
+                            //$msg->setMsg("$fkEnd");
+                        }else{
+                            $st2 = $conecta->prepare("insert into "
+                                    . "endereco values (null,?,?,?,?,?,?)");
+                            $st2->bindParam(1, $logradouro);
+                            $st2->bindParam(2, $complemento);
+                            $st2->bindParam(3, $bairro);
+                            $st2->bindParam(4, $cidade);
+                            $st2->bindParam(5, $uf);
+                            $st2->bindParam(6, $cep);
+                            $st2->execute();
+    
+                            $st3 = $conecta->prepare("select idendereco "
+                                . "from endereco where cep = ? and "
+                                . "logradouro = ? and complemento = ? limit 1");
+                            $st3->bindParam(1, $cep);
+                            $st3->bindParam(2, $logradouro);
+                            $st3->bindParam(3, $complemento);
+                            if($st3->execute()){
+                                if($st3->rowCount() > 0){
+                                    $msg->setMsg("".$st3->rowCount());
+                                    while($linha = $st3->fetch(PDO::FETCH_OBJ)){
+                                        $fkEnd = $linha->idendereco;
+                                    }
+                                    //$msg->setMsg("$fkEnd");
+                                }
+                            }
+                        }
+
                 $stmt = $conecta->prepare("insert into pessoa values "
-                        . "(null,?,?,?,?,?,?,?)");
+                        . "(null,?,?,?,?,?,?,?,?)");
                 $stmt->bindParam(1, $nome);
                 $stmt->bindParam(2, $dtNasc);
                 $stmt->bindParam(3, $login);
@@ -36,12 +85,11 @@ class daoPessoa {
                 $stmt->bindParam(5, $perfil);
                 $stmt->bindParam(6, $email);
                 $stmt->bindParam(7, $cpf);
-                
-                
+                $stmt->bindParam(8, $fkEnd);
                 $stmt->execute();
-                $msg->setMsg("<p style='color: green;'>"
-                        . "Dados Cadastrados com sucesso</p>");
-            } catch (Exception $ex) {
+                    }
+                
+            }catch (ErrorException $ex) {
                 $msg->setMsg($ex);
             }
         }else{
@@ -49,6 +97,7 @@ class daoPessoa {
                         . "Erro na conexão com o banco de dados.</p>");
         }
         $conn = null;
+           
         return $msg;
     }
     
@@ -58,14 +107,23 @@ class daoPessoa {
         $msg = new Mensagem();
         $conecta = $conn->conectadb();
         if($conecta){
-            $idpessoa = $pessoa->getIdpessoa();
+            
+
+            $idpessoa= $pessoa->getIdpessoa();
             $nome = $pessoa->getNome();
-            $dtNasc = $pessoa->getLogin();
+            $dtNasc = $pessoa->getDtNasc();
+            $login = $pessoa->getLogin();
             $senha = $pessoa->getSenha();
             $perfil = $pessoa->getPerfil();
             $email = $pessoa->getEmail();
             $cpf = $pessoa->getCpf();
-            
+
+            $logradouro = $pessoa->getfkEndereco()->getLogradouro();
+            $complemento = $pessoa->getfkEndereco()->getComplemento();
+            $bairro = $pessoa->getfkEndereco()->getBairro();
+            $cidade = $pessoa->getfkEndereco()->getCidade();
+            $uf = $pessoa->getfkEndereco()->getUf();
+            $cep = $pessoa->getfkEndereco()->getCep();
            
             try{
                 $stmt = $conecta->prepare("update pessoa set "
@@ -85,7 +143,8 @@ class daoPessoa {
                 $stmt->bindParam(5, $perfil);
                 $stmt->bindParam(6, $email);
                 $stmt->bindParam(8, $cpf);
-                $stmt->bindParam(9, $idpessoa);
+                $stmt->bindParam(9, $fkEnd);
+                $stmt->bindParam(10, $idpessoa);
                 $stmt->execute();
                 $msg->setMsg("<p style='color: blue;'>"
                         . "Dados atualizados com sucesso</p>");
@@ -106,7 +165,8 @@ class daoPessoa {
         $conecta = $conn->conectadb();
         if($conecta){
             try {
-                $rs = $conecta->query("select * from pessoa");
+                $rs = $conecta->query("select * from pessoa inner join endereco "
+                . " on pessoa.fkendereco = endereco.idendereco");
                 $lista = array();
                 $a = 0;
                 if($rs->execute()){
@@ -121,6 +181,15 @@ class daoPessoa {
                             $pessoa->setPerfil($linha->perfil);
                             $pessoa->setEmail($linha->email);
                             $pessoa->setCpf($linha->cpf);
+
+                            $endereco = new fkEndereco();
+                            $endereco->setLogradouro($linha->logradouro);
+                            $endereco->setComplemento($linha->complemento);
+                            $endereco->setBairro($linha->bairro);
+                            $endereco->setCidade($linha->cidade);
+                            $endereco->setUf($linha->uf);
+                            $endereco->setCep($linha->cep);
+                            $pessoa->setFkEndereco($endereco);
                             $lista[$a] = $pessoa;
                             $a++;
                         }
@@ -164,12 +233,14 @@ class daoPessoa {
         $pessoa = new pessoa();
         if($conecta){
             try {
-                $rs = $conecta->prepare("select * from pessoa where "
-                        . "idpessoa = ?");
+                $rs = $conecta->prepare("select * from pessoa inner join endereco "
+                . " on pessoa.fkendereco = endereco.idendereco where "
+                . "idpessoa = ? limit 1");
                 $rs->bindParam(1, $id);
                 if($rs->execute()){
                     if($rs->rowCount() > 0){
                         while($linha = $rs->fetch(PDO::FETCH_OBJ)){
+                            $pessoa = new pessoa();
                             $pessoa->setIdpessoa($linha->idpessoa);
                             $pessoa->setNome($linha->nome);
                             $pessoa->setDtNasc($linha->dtNasc);
@@ -179,6 +250,14 @@ class daoPessoa {
                             $pessoa->setEmail($linha->email);
                             $pessoa->setCpf($linha->cpf);
                             
+                            $endereco = new fkEndereco();
+                            $endereco->setLogradouro($linha->logradouro);
+                            $endereco->setComplemento($linha->complemento);
+                            $endereco->setBairro($linha->bairro);
+                            $endereco->setCidade($linha->cidade);
+                            $endereco->setUf($linha->uf);
+                            $endereco->setCep($linha->cep);
+                            $pessoa->setFkEndereco($endereco);
                         }
                     }
                 }

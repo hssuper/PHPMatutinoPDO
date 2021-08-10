@@ -27,7 +27,7 @@ class DaoProduto {
                 $stmt->execute();
                 $msg->setMsg("<p style='color: green;'>"
                         . "Dados Cadastrados com sucesso</p>");
-            } catch (Exception $ex) {
+            } catch (ErrorException $ex) {
                 $msg->setMsg($ex);
             }
 
@@ -64,7 +64,7 @@ class DaoProduto {
 
                 $msg->setMsg("<p style='color: green;'>"
                         . "Dados Atualizados com sucesso</p>");
-            } catch (Exception $ex) {
+            } catch (ErrorException $ex) {
                 $msg->setMsg($ex);
             }
 
@@ -113,7 +113,7 @@ class DaoProduto {
                         }
                     }
                 }
-            } catch (Exception $ex) {
+            } catch (ErrorException $ex) {
                 $msg = 'Lista Feita com primazia.';
                 return $msg + $ex;
             }  
@@ -136,7 +136,7 @@ class DaoProduto {
                 $stmt->execute();
                 $msg->setMsg("<p style='color: #d6bc71;'>"
                         . "Dados excluídos com sucesso.</p>");
-            } catch (Exception $ex) {
+            } catch (ErrorException $ex) {
                 $msg->setMsg($ex);
             }
         }else{
@@ -182,7 +182,7 @@ class DaoProduto {
                         }
                     }
                 }
-            } catch (Exception $ex) {
+            } catch (ErrorException $ex) {
                 $msg = 'Pesquisa Feita com primazia.';
                 return $msg + $ex;
             }  
