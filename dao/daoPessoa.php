@@ -248,7 +248,7 @@ class daoPessoa {
                             $pessoa->setPerfil($linha->perfil);
                             $pessoa->setEmail($linha->email);
                             $pessoa->setCpf($linha->cpf);
-                            $endereco = new fkEndereco();
+                            $endereco = new Endereco();
                             $endereco->setLogradouro($linha->logradouro);
                             $endereco->setComplemento($linha->complemento);
                             $endereco->setBairro($linha->bairro);
@@ -285,7 +285,7 @@ class daoPessoa {
                 if($rs->execute()){
                     if($rs->rowCount() > 0){
                         while($linha = $rs->fetch(PDO::FETCH_OBJ)){
-                            $endereco = new fkEndereco();
+                            $endereco = new Endereco();
                             $endereco->setLogradouro($linha->logradouro);
                             $endereco->setComplemento($linha->complemento);
                             $endereco->setBairro($linha->bairro);

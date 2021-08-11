@@ -188,6 +188,7 @@ class DaoFornecedor
     //método para carregar lista de produtos do banco de dados
     public function listarFornecedorsDAO()
     {
+        $msg = new Mensagem();
         $conn = new Conecta();
         $conecta = $conn->conectadb();
         if ($conecta) {
@@ -231,6 +232,7 @@ class DaoFornecedor
     //método para excluir produto na tabela produto
     public function excluirFornecedorDAO($id)
     {
+        $msg = new Mensagem();
         $conn = new Conecta();
         $conecta = $conn->conectadb();
         $msg = new Mensagem();
@@ -259,6 +261,7 @@ class DaoFornecedor
     //método para os dados de produto por id
     public function pesquisarFornecedorIdDAO($id)
     {
+        $msg = new Mensagem();
         $conn = new Conecta();
         $conecta = $conn->conectadb();
         $fornecedor = new Fornecedor();

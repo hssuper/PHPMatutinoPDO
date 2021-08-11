@@ -8,7 +8,7 @@ class PessoaController {
             $complemento, $bairro, $cidade, $uf, $cep,
             $dtNasc, $login, $senha, $perfil,$email,$cpf){
         
-        $endereco = new fkEndereco();
+        $endereco = new Endereco();
         $endereco->setCep($cep);
         $endereco->setLogradouro($logradouro);
         $endereco->setComplemento($complemento);
@@ -37,7 +37,7 @@ class PessoaController {
             $cep, $dtNasc, $login, $senha,$perfil,$email,$cpf){
         
 
-        $endereco = new fkEndereco();
+        $endereco = new Endereco();
         $endereco->setCep($cep);
         $endereco->setLogradouro($logradouro);
         $endereco->setComplemento($complemento);
