@@ -213,6 +213,7 @@ class DaoFornecedor {
                             $fornecedor->setEmail($linha->email);
                             $fornecedor->setTelFixo($linha->telFixo);
                             $fornecedor->setTelCel($linha->telCel);
+                            
                             $fornecedor->setEndereco($endereco);
 
                             $lista[$a] = $fornecedor;
