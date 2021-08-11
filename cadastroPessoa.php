@@ -3,7 +3,7 @@ include_once 'controller/PessoaController.php';
 include_once './model/Pessoa.php';
 include_once './model/Mensagem.php';
 include_once './model/Endereco.php';
-$pc = new PessoController();
+$pc = new PessoaController();
 $msg = new Mensagem();
 $pr = new Pessoa();
 $Pessoa = new Pessoa();
@@ -72,6 +72,12 @@ $btExcluir = FALSE;
                         if (isset($_POST['cadastrarPessoa'])) {
                             $nome = trim($_POST['nome']);
                             if ($nome != "") {
+                                $logradouro = $_POST['logradouro'];
+                                $complemento = $_POST['complemento'];
+                                $bairro = $_POST['bairro'];
+                                $cidade = $_POST['cidade'];
+                                $uf = $_POST['uf'];
+                                $cep = $_POST['cep'];
                                 $dtNasc = $_POST['dtNasc'];
                                 $login = $_POST['login'];
                                 $senha = $_POST['senha'];
@@ -80,9 +86,11 @@ $btExcluir = FALSE;
                                 $cpf = $_POST['cpf'];
                                 $idPessoa = $_POST['idPessoa'];
 
-                                $pc = new PessoController();
+                                $pc = new PessoaController();
                                 unset($_POST['cadastrarPessoa']);
-                                $msg = $pc->inserirPessoa($nome, $dtNasc, $login, $senha,$perfil,$email,$cpf, $idPessoa );
+                                $msg = $pc->inserirPessoa($idPessoa, $nome,
+                                $logradouro, $complemento, $bairro, $cidade, $uf, 
+                                $cep, $dtNasc, $login, $senha,$perfil,$email,$cpf);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroPessoa.php'\">";
@@ -93,7 +101,13 @@ $btExcluir = FALSE;
                         if (isset($_POST['atualizarPessoa'])) {
                             $nomePessoa = trim($_POST['nome']);
                             if ($nomePessoa != "") {
-                                $fkPessoa = $_POST['idPessoa'];
+                                $idPessoa = $_POST['idPessoa'];
+                                $logradouro = $_POST['logradouro'];
+                                $complemento = $_POST['complemento'];
+                                $bairro = $_POST['bairro'];
+                                $cidade = $_POST['cidade'];
+                                $uf = $_POST['uf'];
+                                $cep = $_POST['cep'];
                                 $dtNasc = $_POST['dtNasc'];
                                 $login = $_POST['login'];
                                 $senha = $_POST['senha'];
@@ -103,9 +117,11 @@ $btExcluir = FALSE;
                                 
                                 
 
-                                $pc = new PessoController();
+                                $pc = new PessoaController();
                                 unset($_POST['atualizarPessoa']);
-                                $msg = $pc->atualizarPessoa($idPessoa, $nome, $dtNasc, $login, $senha,$perfil,$email,$cpf);
+                                $msg = $pc->atualizarPessoa($idPessoa, $nome,
+                                $logradouro, $complemento, $bairro, $cidade, $uf, 
+                                $cep, $dtNasc, $login, $senha,$perfil,$email,$cpf);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroPessoa.php'\">";
@@ -116,7 +132,7 @@ $btExcluir = FALSE;
                             if ($pr != null) {
                                 $id = $_POST['ide'];
                                 
-                                $pc = new PessoController();
+                                $pc = new PessoaController();
                                 unset($_POST['excluir']);
                                 $msg = $pc->excluirPessoa($id);
                                 echo $msg->getMsg();
@@ -129,7 +145,7 @@ $btExcluir = FALSE;
                             if ($pr != null) {
                                 $id = $_POST['idPessoa'];
                                 unset($_POST['excluirPessoa']);
-                                $pc = new PessoController();
+                                $pc = new PessoaController();
                                 $msg = $pc->excluirPessoa($id);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
@@ -147,7 +163,7 @@ $btExcluir = FALSE;
                             $btAtualizar = TRUE;
                             $btExcluir = TRUE;
                             $id = $_GET['id'];
-                            $pc = new PessoController();
+                            $pc = new PessoaController();
                             $pr = $pc->pesquisarPessoaId($id);
                         }
                         ?>
@@ -176,17 +192,40 @@ $btExcluir = FALSE;
                                     <input class="form-control" type="text" 
                                            value="<?php echo $pr->getLogin(); ?>" name="login"> 
                                     <label>senha</label>  
-                                    <input class="form-control" type="text" 
+                                    <input class="form-control" type="password" 
                                            value="<?php echo $pr->getSenha(); ?>" name="senha">
+                                           <label>Conf. senha</label>  
+                                    <input class="form-control" type="password" 
+                                           value="<?php echo $pr->getSenha(); ?>" name="senha2">
                                            <label>perfil</label>  
                                     <input class="form-control" type="text" 
                                            value="<?php echo $pr->getPerfil(); ?>" name="perfil">
+                                           <option>[--SELECIONE--]</option>
                                            <label>email</label>  
-                                    <input class="form-control" type="text" 
+                                    <input class="form-control" type="email" 
                                            value="<?php echo $pr->getEmail(); ?>" name="email">
                                            <label>Cpf</label>  
                                     <input class="form-control" type="text" 
+                                    onkeypress="mascara(this, '###.###.###-##')" maxlength="14"
                                            value="<?php echo $pr->getCpf(); ?>" name="cpf">
+                                           <input class="form-control" type="text" id="cep" 
+                                           onkeypress="mascara(this, '#####-###')" maxlength="9"
+                                           value="<?php echo $fr->getEndereco()->getCep(); ?>" name="cep">
+                                    <label>Rua/Logradouro</label>  
+                                    <input class="form-control" type="text" id="rua"
+                                           value="<?php echo $fr->getEndereco()->getLogradouro(); ?>" name="logradouro">   
+                                    <label>Complemento</label>  
+                                    <input class="form-control" type="text" id="complemento"
+                                           value="<?php echo $fr->getEndereco()->getComplemento(); ?>" name="complemento">
+                                    <label>Bairro</label>  
+                                    <input class="form-control" type="text" id="bairro"
+                                           value="<?php echo $fr->getEndereco()->getBairro(); ?>" name="bairro">
+                                    <label>Cidade</label>  
+                                    <input class="form-control" type="text" id="cidade"
+                                           value="<?php echo $fr->getEndereco()->getCidade(); ?>" name="cidade">
+                                    <label>UF</label>  
+                                    <input class="form-control" type="text" id="uf"
+                                           value="<?php echo $fr->getEndereco()->getUf(); ?>" name="uf">
                                     </select>
                                     <input type="submit" name="cadastrarPessoa"
                                            class="btn btn-success btInput" value="Enviar"
@@ -255,11 +294,11 @@ $btExcluir = FALSE;
                             </thead>
                             <tbody>
                                 <?php
-                                $pcTable = new PessoController();
-                                $listarPessoas = $pcTable->listarPessoas();
+                                $pcTable = new PessoaController();
+                                $listaPessoas = $pcTable->listarPessoas();
                                 $a = 0;
-                                if ($listarPessoas != null) {
-                                    foreach ($listarPessoas as $lp) {
+                                if ($listaPessoas != null) {
+                                    foreach ($listaPessoas as $lp) {
                                         $a++;
                                         ?>
                                         <tr>

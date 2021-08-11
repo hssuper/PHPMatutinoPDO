@@ -64,7 +64,7 @@ class PessoaController {
     }
     
     //método para carregar a lista de produtos que vem da DAO
-    public function listarPessoaes(){
+    public function listarPessoas(){
         $daoPessoa = new DaoPessoa();
         return $daoPessoa->listarPessoasDAO();
     }
