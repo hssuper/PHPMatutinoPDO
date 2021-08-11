@@ -1,6 +1,6 @@
 <?php
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/dao/DaoFornecedor.php';
-include_once 'C:/xampp/htdocs/PHPMatutinoPDO/PHPMatutinoPDO/model/Fornecedor.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO2/dao/DaoFornecedor.php';
+include_once 'C:/xampp/htdocs/PHPMatutinoPDO2/model/Fornecedor.php';
 
 class FornecedorController {
     
@@ -8,7 +8,7 @@ class FornecedorController {
             $complemento, $bairro, $cidade, $uf, $cep,
             $representante, $email, $telFixo, $telCel){
         
-        $endereco = new fkEndereco();
+        $endereco = new Endereco();
         $endereco->setCep($cep);
         $endereco->setLogradouro($logradouro);
         $endereco->setComplemento($complemento);
@@ -30,12 +30,10 @@ class FornecedorController {
     }
     
     //método para atualizar dados de produto no BD
-    public function atualizarFornecedor($idfornecedor, $nomeFornecedor,
-            $logradouro, $complemento, $bairro, $cidade, $uf, 
-            $cep, $representante, $email, $telFixo, $telCel){
-        
-
-        $endereco = new fkEndereco();
+    public function atualizarFornecedor($idfornecedor, $nomeFornecedor, 
+            $logradouro, $complemento, $bairro, $cidade, $uf, $cep,
+            $representante, $email, $telFixo, $telCel){
+        $endereco = new Endereco();
         $endereco->setCep($cep);
         $endereco->setLogradouro($logradouro);
         $endereco->setComplemento($complemento);
@@ -50,17 +48,15 @@ class FornecedorController {
         $fornecedor->setEmail($email);
         $fornecedor->setTelFixo($telFixo);
         $fornecedor->setTelCel($telCel);
-       
-        $fornecedor->setEndereco($endereco); 
-
+                
+        $fornecedor->setEndereco($endereco);
         
-
         $daoFornecedor = new DaoFornecedor();
         return $daoFornecedor->atualizarFornecedorDAO($fornecedor);
     }
     
     //método para carregar a lista de produtos que vem da DAO
-    public function listarFornecedors(){
+    public function listarFornecedores(){
         $daoFornecedor = new DaoFornecedor();
         return $daoFornecedor->listarFornecedorsDAO();
     }

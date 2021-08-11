@@ -4,7 +4,7 @@ include_once './model/Fornecedor.php';
 include_once './model/Endereco.php';
 include_once './model/Mensagem.php';
 $msg = new Mensagem();
-$en = new fkEndereco();
+$en = new Endereco();
 $fr = new Fornecedor();
 $fr->setEndereco($en);
 $btEnviar = FALSE;
@@ -124,9 +124,8 @@ $btExcluir = FALSE;
                                 $fc = new FornecedorController();
                                 unset($_POST['atualizarFornecedor']);
                                 $msg = $fc->atualizarFornecedor($idfornecedor, $nomeFornecedor, 
-                                        $logradouro, $complemento, $bairro, 
-                                        $cidade, $uf, $cep, $representante, $email, 
-                                        $telFixo, $telCel);
+                                    $logradouro, $complemento, $bairro, $cidade, $uf, $cep,
+                                    $representante, $email, $telFixo, $telCel);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroFornecedor.php'\">";

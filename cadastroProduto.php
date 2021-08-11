@@ -77,11 +77,12 @@ $btExcluir = FALSE;
                                 $vlrCompra = $_POST['vlrCompra'];
                                 $vlrVenda = $_POST['vlrVenda'];
                                 $qtdEstoque = $_POST['qtdEstoque'];
-                                $idfornecedor = $_POST['idfornecedor'];
+                                $fkfornecedor = $_POST['idfornecedor'];                                
                                 
                                 $pc = new ProdutoController();
                                 unset($_POST['cadastrarProduto']);
-                                $msg = $pc->inserirProduto($nomeProduto, $vlrCompra, $vlrVenda, $qtdEstoque, $idfornecedor);
+                                $msg = $pc->inserirProduto($nomeProduto, $vlrCompra,
+                                        $vlrVenda, $qtdEstoque, $fkfornecedor);
                                 echo $msg->getMsg();
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
                                     URL='cadastroProduto.php'\">";
@@ -92,15 +93,17 @@ $btExcluir = FALSE;
                         if (isset($_POST['atualizarProduto'])) {
                             $nomeProduto = trim($_POST['nomeProduto']);
                             if ($nomeProduto != "") {
-                                $id = $_POST['idProduto'];
+                                $id = $_POST['idproduto'];
                                 $vlrCompra = $_POST['vlrCompra'];
                                 $vlrVenda = $_POST['vlrVenda'];
                                 $qtdEstoque = $_POST['qtdEstoque'];
-                                $idfornecedor = $_POST['idfornecedor']; 
+                                $fkfornecedor = $_POST['idfornecedor']; 
                                 
                                 $pc = new ProdutoController();
                                 unset($_POST['atualizarProduto']);
-                                $msg = $pc->atualizarProduto($idProduto, $nomeProduto,  $vlrCompra, $vlrVenda, $qtdEstoque, $idfornecedor);
+                                $msg = $pc->atualizarProduto($id, $nomeProduto, 
+                                        $vlrCompra, $vlrVenda, $qtdEstoque,
+                                        $fkfornecedor);
                                 echo $msg->getMsg();
                                 $pr = null;
                                 echo "<META HTTP-EQUIV='REFRESH' CONTENT=\"2;
@@ -135,16 +138,16 @@ $btExcluir = FALSE;
 
                         if (isset($_POST['limpar'])) {
                             $pr = null;
-                            unset($_GET['idProduto']);
+                            unset($_GET['id']);
                             header("Location: cadastroProduto.php");
                         }
-                        if (isset($_GET['idproduto'])) {
+                        if (isset($_GET['id'])) {
                             $btEnviar = TRUE;
                             $btAtualizar = TRUE;
                             $btExcluir = TRUE;
-                            $id = $_GET['idproduto'];
+                            $id = $_GET['id'];
                             $pc = new ProdutoController();
-                            $pr = $pc->pesquisarProdutoId($idProduto);
+                            $pr = $pc->pesquisarProdutoId($id);
                         }
                         ?>
                         <form method="post" action="">
@@ -200,7 +203,6 @@ $btExcluir = FALSE;
                                           }
                                         ?>
                                     </select>
-
                                     <input type="submit" name="cadastrarProduto"
                                            class="btn btn-success btInput" value="Enviar"
                                            <?php if($btEnviar == TRUE) echo "disabled"; ?>>
@@ -210,7 +212,7 @@ $btExcluir = FALSE;
                                     <button type="button" class="btn btn-warning btInput" 
                                             data-bs-toggle="modal" data-bs-target="#ModalExcluir"
                                             <?php if($btExcluir == FALSE) echo "disabled"; ?>>
-                                        
+                                        Excluir
                                     </button>
                                     <!-- Modal para excluir -->
                                     <div class="modal fade" id="ModalExcluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

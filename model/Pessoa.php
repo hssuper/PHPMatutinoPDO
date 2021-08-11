@@ -10,12 +10,15 @@ class Pessoa {
     private $perfil;
     private $email;
     private $cpf;
-    private $fkEndereco;
+    private $fkendereco;
 
-function getfkEndereco() {
-        return $this->fkEndereco;
+    function getFkendereco() {
+        return $this->fkendereco;
     }
-    
+
+    function setFkendereco($fkendereco) {
+        $this->fkendereco = $fkendereco;
+    }
 
     function getIdpessoa() {
         return $this->idpessoa;
@@ -48,11 +51,6 @@ function getfkEndereco() {
     function getCpf() {
         return $this->cpf;
     }
-
-    function setFkEndereco($fkEndereco) {
-        $this->fkEndereco = $fkEndereco;
-    }
-
 
     function setIdpessoa($idpessoa) {
         $this->idpessoa = $idpessoa;
